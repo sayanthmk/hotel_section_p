@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/datas_page.dart';
 import 'package:hotel_side/controllers/field_information/roomprovider.dart';
 import 'package:hotel_side/views/add_rooms/images_upload.dart';
 import 'package:hotel_side/views/add_rooms/widgets/custom_card.dart';
-import 'package:hotel_side/widgets/auth_widgets/textfrom_field.dart';
 import 'package:provider/provider.dart';
 
-class RoomDescriptionPage extends StatelessWidget {
-  RoomDescriptionPage({super.key});
+class RoomAmentities extends StatelessWidget {
+  RoomAmentities({super.key});
 
   final _formKey = GlobalKey<FormState>();
 
@@ -29,130 +27,6 @@ class RoomDescriptionPage extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                      labelText: 'Number of Extra Adults Allowed'),
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    hotelProvider.updateRoomData(
-                        'Number of Extra Adults Allowed', int.tryParse(value));
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter Number of Extra Adults Allowed';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                      labelText: 'Number of Extra Child Allowed'),
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    hotelProvider.updateRoomData(
-                        'Number of Extra Child Allowed', int.tryParse(value));
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter Number of Extra Child Allowed';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(labelText: 'Base Price'),
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    hotelProvider.updateRoomData(
-                        'Base Price', int.tryParse(value));
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Base Price';
-                    }
-                    return null;
-                  },
-                ),
-                // CustomTextFormField(
-                //   onChanged: (value) {
-                //     hotelProvider.updateRoomData(
-                //         'Base Price (₹)', int.tryParse(value));
-                //   },
-                //   labelText: 'Base Price (₹)',
-                //   hintText: 'Base Price (₹)',
-                //   keyboardType: TextInputType.visiblePassword,
-                //   textInputAction: TextInputAction.done,
-                //   autovalidateMode: AutovalidateMode.onUserInteraction,
-                //   validator: (value) {
-                //     if (value == null || value.isEmpty) {
-                //       return 'Value is required';
-                //     } else if (value.length < 4) {
-                //       return 'Inavlid Value';
-                //     }
-                //     return null;
-                //   },
-                //   borderColor: Colors.grey,
-                //   focusedBorderColor: Colors.blue,
-                //   enabledBorderColor: Colors.grey,
-                //   errorBorderColor: Colors.red,
-                //   obscureText: true,
-                // ),
-                // const SizedBox(
-                //   height: 20,
-                // ),
-                // CustomTextFormField(
-                //   maxlength: 2,
-                //   onChanged: (value) {
-                //     hotelProvider.updateRoomData(
-                //         'Number of Extra Adults Allowed', int.tryParse(value));
-                //   },
-                //   labelText: 'Number of Extra Adults Allowed',
-                //   hintText: 'Number of Extra Adults Allowed',
-                //   keyboardType: TextInputType.visiblePassword,
-                //   textInputAction: TextInputAction.done,
-                //   autovalidateMode: AutovalidateMode.onUserInteraction,
-                //   validator: (value) {
-                //     if (value == null || value.isEmpty) {
-                //       return 'Value is required';
-                //     } else if (value.length < 3) {
-                //       return 'Inavlid Value';
-                //     }
-                //     return null;
-                //   },
-                //   borderColor: Colors.grey,
-                //   focusedBorderColor: Colors.blue,
-                //   enabledBorderColor: Colors.grey,
-                //   errorBorderColor: Colors.red,
-                //   obscureText: true,
-                // ),
-                // const SizedBox(
-                //   height: 20,
-                // ),
-                // CustomTextFormField(
-                //   maxlength: 2,
-                //   onChanged: (value) {
-                //     hotelProvider.updateRoomData(
-                //         'Number of Extra Child Allowed', int.tryParse(value));
-                //   },
-                //   labelText: 'Number of Extra Child Allowed',
-                //   hintText: 'Enter your Number of Extra Child Allowed',
-                //   keyboardType: TextInputType.visiblePassword,
-                //   textInputAction: TextInputAction.done,
-                //   autovalidateMode: AutovalidateMode.onUserInteraction,
-                //   validator: (value) {
-                //     if (value == null || value.isEmpty) {
-                //       return 'Value is required';
-                //     } else if (value.length < 3) {
-                //       return 'Inavlid Value';
-                //     }
-                //     return null;
-                //   },
-                //   borderColor: Colors.grey,
-                //   focusedBorderColor: Colors.blue,
-                //   enabledBorderColor: Colors.grey,
-                //   errorBorderColor: Colors.red,
-                //   obscureText: true,
-                // ),
 
                 // Laundry
                 const SizedBox(
@@ -499,6 +373,130 @@ class RoomDescriptionPage extends StatelessWidget {
                 //   validator: (value) {
                 //     if (value == null || value.isEmpty) {
                 //       return 'Please enter Number of Extra Adults Allowed';
+                //     }
+                //     return null;
+                //   },
+                // ),
+                  // CustomTextFormField(
+                //   onChanged: (value) {
+                //     hotelProvider.updateRoomData(
+                //         'Base Price (₹)', int.tryParse(value));
+                //   },
+                //   labelText: 'Base Price (₹)',
+                //   hintText: 'Base Price (₹)',
+                //   keyboardType: TextInputType.visiblePassword,
+                //   textInputAction: TextInputAction.done,
+                //   autovalidateMode: AutovalidateMode.onUserInteraction,
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Value is required';
+                //     } else if (value.length < 4) {
+                //       return 'Inavlid Value';
+                //     }
+                //     return null;
+                //   },
+                //   borderColor: Colors.grey,
+                //   focusedBorderColor: Colors.blue,
+                //   enabledBorderColor: Colors.grey,
+                //   errorBorderColor: Colors.red,
+                //   obscureText: true,
+                // ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                // CustomTextFormField(
+                //   maxlength: 2,
+                //   onChanged: (value) {
+                //     hotelProvider.updateRoomData(
+                //         'Number of Extra Adults Allowed', int.tryParse(value));
+                //   },
+                //   labelText: 'Number of Extra Adults Allowed',
+                //   hintText: 'Number of Extra Adults Allowed',
+                //   keyboardType: TextInputType.visiblePassword,
+                //   textInputAction: TextInputAction.done,
+                //   autovalidateMode: AutovalidateMode.onUserInteraction,
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Value is required';
+                //     } else if (value.length < 3) {
+                //       return 'Inavlid Value';
+                //     }
+                //     return null;
+                //   },
+                //   borderColor: Colors.grey,
+                //   focusedBorderColor: Colors.blue,
+                //   enabledBorderColor: Colors.grey,
+                //   errorBorderColor: Colors.red,
+                //   obscureText: true,
+                // ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                // CustomTextFormField(
+                //   maxlength: 2,
+                //   onChanged: (value) {
+                //     hotelProvider.updateRoomData(
+                //         'Number of Extra Child Allowed', int.tryParse(value));
+                //   },
+                //   labelText: 'Number of Extra Child Allowed',
+                //   hintText: 'Enter your Number of Extra Child Allowed',
+                //   keyboardType: TextInputType.visiblePassword,
+                //   textInputAction: TextInputAction.done,
+                //   autovalidateMode: AutovalidateMode.onUserInteraction,
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Value is required';
+                //     } else if (value.length < 3) {
+                //       return 'Inavlid Value';
+                //     }
+                //     return null;
+                //   },
+                //   borderColor: Colors.grey,
+                //   focusedBorderColor: Colors.blue,
+                //   enabledBorderColor: Colors.grey,
+                //   errorBorderColor: Colors.red,
+                //   obscureText: true,
+                // ),
+   // TextFormField(
+                //   decoration: const InputDecoration(
+                //       labelText: 'Number of Extra Adults Allowed'),
+                //   keyboardType: TextInputType.number,
+                //   onChanged: (value) {
+                //     hotelProvider.updateRoomData(
+                //         'Number of Extra Adults Allowed', int.tryParse(value));
+                //   },
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Please enter Number of Extra Adults Allowed';
+                //     }
+                //     return null;
+                //   },
+                // ),
+                // TextFormField(
+                //   decoration: const InputDecoration(
+                //       labelText: 'Number of Extra Child Allowed'),
+                //   keyboardType: TextInputType.number,
+                //   onChanged: (value) {
+                //     hotelProvider.updateRoomData(
+                //         'Number of Extra Child Allowed', int.tryParse(value));
+                //   },
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Please enter Number of Extra Child Allowed';
+                //     }
+                //     return null;
+                //   },
+                // ),
+                // TextFormField(
+                //   decoration: const InputDecoration(labelText: 'Base Price'),
+                //   keyboardType: TextInputType.number,
+                //   onChanged: (value) {
+                //     hotelProvider.updateRoomData(
+                //         'Base Price', int.tryParse(value));
+                //   },
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Base Price';
                 //     }
                 //     return null;
                 //   },

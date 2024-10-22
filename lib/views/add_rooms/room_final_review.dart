@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/datas_page.dart';
 import 'package:hotel_side/controllers/field_information/roomprovider.dart';
 import 'package:hotel_side/views/registration_page/success_screen.dart';
+import 'package:hotel_side/views/rooms_list/rooms_list.dart';
 import 'package:provider/provider.dart';
 
 class RoomsSubmissionPage extends StatelessWidget {
@@ -15,7 +15,7 @@ class RoomsSubmissionPage extends StatelessWidget {
 
     final cupboard = roomdata['Cupboard'] ?? false;
     final wardrobe = roomdata['Wardrobe'] ?? false;
-    final accommodation = roomdata['Accommodation Only'] ?? false;
+    // final accommodation = roomdata['Accommodation Only'] ?? false;
     final breakfast = roomdata['Free Breakfast'] ?? false;
     final lunch = roomdata['Free Lunch'] ?? false;
     final dinner = roomdata['Free Dinner'] ?? false;
@@ -47,6 +47,8 @@ class RoomsSubmissionPage extends StatelessWidget {
               Text(
                   'Property Size: ${roomdata['Property Size'] ?? 'Value not provided'}'),
               Text(
+                  'Room type: ${roomdata['room_type'] ?? 'Value not provided'}'),
+              Text(
                   'Select Extra Bed Types: ${roomdata['Select Extra Bed Types'] ?? 'Value not provided'}'),
               Text(
                   'Base Price: ${roomdata['Base Price'] ?? 'Value not provided'}'),
@@ -54,9 +56,10 @@ class RoomsSubmissionPage extends StatelessWidget {
                   'Number of Extra Adults Allowed: ${roomdata['Number of Extra Adults Allowed'] ?? 'Value not provided'}'),
               Text(
                   'Number of Extra Child Allowed: ${roomdata['Number of Extra Child Allowed'] ?? 'Value not provided'}'),
+
               Text('cupboard: ${cupboard ? 'Yes' : 'No'}'),
               Text('wardrobe: ${wardrobe ? 'Yes' : 'No'}'),
-              Text('accommodation: ${accommodation ? 'Yes' : 'No'}'),
+              // Text('accommodation: ${accommodation ? 'Yes' : 'No'}'),
               Text('breakfast: ${breakfast ? 'Yes' : 'No'}'),
               Text('lunch: ${lunch ? 'Yes' : 'No'}'),
               Text('dinner: ${dinner ? 'Yes' : 'No'}'),
@@ -125,7 +128,7 @@ class RoomsSubmissionPage extends StatelessWidget {
                   // String? hotelId = roomProvider.hotelId;
                   roomProvider.submitRoom().then((_) {
                     Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const SuccessScreen(),
+                      builder: (context) => const RoomListPage(),
                     ));
                   }).catchError((error) {
                     ScaffoldMessenger.of(context).showSnackBar(

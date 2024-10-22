@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_side/controllers/auth_service/auth_service.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 class EnhancedWelcomeCard extends StatelessWidget {
   final String userName;
@@ -11,6 +13,8 @@ class EnhancedWelcomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+
     return Card(
       elevation: 4,
       shape: RoundedRectangleBorder(
@@ -50,7 +54,9 @@ class EnhancedWelcomeCard extends StatelessWidget {
                             ),
                           ),
                           TextSpan(
-                            text: userName,
+                            text: authService.currentUser?.email
+                                ?.split('@')[0]
+                                .toUpperCase(),
                             style: const TextStyle(
                               fontSize: 32,
                               fontWeight: FontWeight.bold,

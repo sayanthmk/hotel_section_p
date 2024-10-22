@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/auth_service/auth_service.dart';
 import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
+import 'package:hotel_side/views/bottom_nav/bottom_nav.dart';
 import 'package:hotel_side/views/registration_page/entry_page.dart';
 import 'package:hotel_side/views/registration_page/success_screen.dart';
 import 'package:provider/provider.dart';
@@ -26,7 +27,7 @@ class HotelCheckPage extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => SuccessScreen(),
+            builder: (context) => BottomNavScreen(),
           ),
         );
       } else {
@@ -41,19 +42,19 @@ class HotelCheckPage extends StatelessWidget {
     });
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Check Hotel Registration'),
-      ),
+      // appBar: AppBar(
+      //   title: const Text('Check Hotel Registration'),
+      // ),
       body: const Center(
         child: CircularProgressIndicator(), // Show loading indicator
       ),
-      bottomNavigationBar: ElevatedButton(
-        child: const Text('Sign Out'),
-        onPressed: () async {
-          await authService.signOut();
-          Navigator.of(context).pop();
-        },
-      ),
+      // bottomNavigationBar: ElevatedButton(
+      //   child: const Text('Sign Out'),
+      //   onPressed: () async {
+      //     await authService.signOut();
+      //     Navigator.of(context).pop();
+      //   },
+      // ),
     );
   }
 }

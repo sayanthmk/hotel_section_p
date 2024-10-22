@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/views/registration_page/hotel_type_select.dart';
+import 'package:hotel_side/views/registration_page/hotel_type/hotel_type_select.dart';
 import 'package:hotel_side/widgets/home_page_widgets/button.dart';
 
 class EntryRegistrationPage extends StatelessWidget {

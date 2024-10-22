@@ -1,8 +1,8 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
+import 'package:hotel_side/views/bottom_nav/bottom_nav.dart';
 import 'package:hotel_side/views/registration_page/final_review_page/widgets/detail_card.dart';
-import 'package:hotel_side/views/registration_page/success_screen.dart';
 import 'package:provider/provider.dart';
 
 class FinalReview extends StatelessWidget {
@@ -39,7 +39,7 @@ class FinalReview extends StatelessWidget {
 
                     hotelProvider.submitHotel().then((_) {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const SuccessScreen(),
+                        builder: (context) => BottomNavScreen(),
                       ));
                     }).catchError((error) {
                       ScaffoldMessenger.of(context).showSnackBar(

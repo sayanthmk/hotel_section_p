@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/field_information/roomprovider.dart';
-import 'package:hotel_side/views/add_rooms/room_description.dart';
+import 'package:hotel_side/views/add_rooms/room_amentities.dart';
 import 'package:hotel_side/widgets/rooms_widgets/squre_radio_button.dart';
 import 'package:provider/provider.dart';
 
-class PropertyDescription extends StatelessWidget {
-  PropertyDescription({super.key});
+class RoomFacility extends StatelessWidget {
+  RoomFacility({super.key});
 
   final _formKey = GlobalKey<FormState>();
 
@@ -24,36 +24,6 @@ class PropertyDescription extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // Room Type
-                TextFormField(
-                  decoration: const InputDecoration(labelText: 'Room Area'),
-                  onChanged: (value) {
-                    hotelProvider.updateRoomData('room_area', value);
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter the room area';
-                    }
-                    return null;
-                  },
-                ),
-                // Room Size
-                TextFormField(
-                  decoration:
-                      const InputDecoration(labelText: 'Room Size (sq. ft)'),
-                  keyboardType: TextInputType.number,
-                  onChanged: (value) {
-                    hotelProvider.updateRoomData(
-                        'Property Size', int.tryParse(value));
-                  },
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter the room size';
-                    }
-                    return null;
-                  },
-                ),
-
                 //Cupboard
                 RoomRadioButton(
                   heading: 'Cupboard',
@@ -122,7 +92,7 @@ class PropertyDescription extends StatelessWidget {
                       // Move to the image upload page
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (_) => RoomDescriptionPage(),
+                          builder: (_) => RoomAmentities(),
                         ),
                       );
                     }
@@ -216,3 +186,32 @@ class PropertyDescription extends StatelessWidget {
               //     hotelProvider.updateRoomData('Wifi', value);
               //   },
               // ),
+                     // Room Type
+                // TextFormField(
+                //   decoration: const InputDecoration(labelText: 'Room Area'),
+                //   onChanged: (value) {
+                //     hotelProvider.updateRoomData('room_area', value);
+                //   },
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Please enter the room area';
+                //     }
+                //     return null;
+                //   },
+                // ),
+                // // Room Size
+                // TextFormField(
+                //   decoration:
+                //       const InputDecoration(labelText: 'Room Size (sq. ft)'),
+                //   keyboardType: TextInputType.number,
+                //   onChanged: (value) {
+                //     hotelProvider.updateRoomData(
+                //         'Property Size', int.tryParse(value));
+                //   },
+                //   validator: (value) {
+                //     if (value == null || value.isEmpty) {
+                //       return 'Please enter the room size';
+                //     }
+                //     return null;
+                //   },
+                // ),

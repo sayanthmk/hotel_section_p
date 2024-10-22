@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/auth_service/auth_service.dart';
 import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
 import 'package:hotel_side/views/auth/route_page.dart';
-import 'package:hotel_side/views/add_rooms/property_description.dart';
-import 'package:hotel_side/views/add_rooms/rooms_list.dart';
+import 'package:hotel_side/views/add_rooms/room_facilities.dart';
+import 'package:hotel_side/views/rooms_list/rooms_list.dart';
 import 'package:provider/provider.dart';
 
 class SuccessScreen extends StatelessWidget {
@@ -37,7 +37,7 @@ class SuccessScreen extends StatelessWidget {
                 // Navigate to PropertyDescription
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => PropertyDescription(),
+                    builder: (context) => RoomFacility(),
                   ),
                 );
               },

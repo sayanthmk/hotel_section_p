@@ -183,4 +183,33 @@ class HotelProvider extends ChangeNotifier {
       return null;
     }
   }
+
+  /// New Method: Get current hotel details
+  Future<Map<String, dynamic>?> getCurrentHotelDetails() async {
+    try {
+      String? userId = getUserId(); // Get the current user's UID
+
+      if (userId == null) {
+        log('User is not logged in');
+        return null; // If user is not logged in, return null
+      }
+
+      DocumentSnapshot hotelDoc =
+          await _firestore.collection('hotels').doc(userId).get();
+
+      if (hotelDoc.exists) {
+        Map<String, dynamic> hotelDetails =
+            hotelDoc.data() as Map<String, dynamic>;
+
+        log('Fetched current hotel details for userId: $userId');
+        return hotelDetails;
+      } else {
+        log('No hotel found for userId: $userId');
+        return null;
+      }
+    } catch (e) {
+      debugPrint('Error fetching current hotel details: $e');
+      return null;
+    }
+  }
 }

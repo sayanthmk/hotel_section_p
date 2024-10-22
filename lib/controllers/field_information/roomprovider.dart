@@ -11,12 +11,12 @@ class RoomProvider extends ChangeNotifier {
 
   final Map<String, dynamic> roomData = {
     "room_area": '',
-    "accommodation_type": '', // Corrected typo here
+    "room_type": '', // Corrected typo here
     "Property Size": 0,
     "Select Extra Bed Types": 0,
     "Cupboard": false,
     "Wardrobe": false,
-    "Accommodation Only": false,
+    // "Accommodation Only": false,
     "Free Breakfast": false,
     "Free Lunch": false,
     "Free Dinner": false,
@@ -225,5 +225,23 @@ class RoomProvider extends ChangeNotifier {
       log('Error fetching rooms: $e');
       throw Exception('Failed to fetch rooms. Error: $e');
     }
+  }
+  //Drop down box items
+
+  String? _roomsselectedItem;
+
+  final List<String> roomsItems = [
+    'Single Room',
+    'Double Room',
+    'Suite',
+    'Deluxe',
+    'Executive'
+  ];
+
+  String? get roomsSelectedItem => _roomsselectedItem;
+
+  void setRoomSelectedItem(String? value) {
+    _roomsselectedItem = value;
+    notifyListeners();
   }
 }

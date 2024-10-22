@@ -15,9 +15,10 @@ class RoomDetailPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            roomDetails['images'].isNotEmpty
+            // Text("hello"),
+            roomDetails['room_images'].isNotEmpty
                 ? Image.network(
-                    roomDetails['images'][0],
+                    roomDetails['room_images'][0],
                     height: 200,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -28,15 +29,16 @@ class RoomDetailPage extends StatelessWidget {
                     child: const Icon(Icons.image, size: 50),
                   ),
             const SizedBox(height: 16.0),
+
             Text(
               'Room Area: ${roomDetails['room_area']}',
               style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8.0),
-            Text(
-              'Accommodation Type: ${roomDetails['accomadation_type']}',
-              style: const TextStyle(fontSize: 18),
-            ),
+            // Text(
+            //   'Accommodation Type: ${roomDetails['accomadation_type']}',
+            //   style: const TextStyle(fontSize: 18),
+            // ),
             const SizedBox(height: 8.0),
             Text(
               'Property Size: ${roomDetails['Property Size']} sq ft',

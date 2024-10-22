@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_side/views/dashboard/rooms_section/person_detail.dart';
+import 'package:hotel_side/views/rooms_list/rooms_list.dart';
 
 class RoomStatusCard extends StatelessWidget {
   const RoomStatusCard({super.key});
@@ -140,7 +141,11 @@ class RoomStatusCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => RoomListPage(),
+                        ));
+                      },
                       icon: const Icon(Icons.view_list),
                       label: const Text('View All Rooms'),
                       style: TextButton.styleFrom(

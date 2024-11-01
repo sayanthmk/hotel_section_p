@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/field_information/roomprovider.dart';
-import 'package:hotel_side/views/add_rooms/room_amentities.dart';
+import 'package:hotel_side/views/add_rooms/room_amentites/room_amentities.dart';
 import 'package:hotel_side/widgets/rooms_widgets/squre_radio_button.dart';
 import 'package:provider/provider.dart';
 

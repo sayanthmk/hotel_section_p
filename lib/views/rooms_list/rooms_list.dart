@@ -11,11 +11,14 @@ class RoomListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Obtain the provider outside FutureBuilder
+    final roomProvider = Provider.of<RoomProvider>(context, listen: false);
+
     return Scaffold(
       backgroundColor: const Color(0xFFF5F9FF),
       appBar: const CustomAppBar(),
       body: FutureBuilder(
-        future: Provider.of<RoomProvider>(context, listen: false).getRooms(),
+        future: roomProvider.getRooms(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingState();
@@ -30,7 +33,6 @@ class RoomListPage extends StatelessWidget {
                 return const EmptyState();
               }
 
-              // return RoomListView(rooms: rooms);
               return ListView.builder(
                 padding: const EdgeInsets.all(16),
                 itemCount: rooms.length,
@@ -42,16 +44,21 @@ class RoomListPage extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => RoomTypeSelection(),
-          ),
-        );
-      }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => RoomTypeSelection(),
+            ),
+          );
+        },
+        backgroundColor: const Color(0xff1E91B6),
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
+
 
 
 // 

@@ -11,6 +11,7 @@ class HotelProvider extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   final Map<String, dynamic> hotelData = {
+    'userId': '', // Store the user ID who created the hotel
     'hotel_type': '',
     'property_setup': '',
     'hotel_name': '',
@@ -34,6 +35,7 @@ class HotelProvider extends ChangeNotifier {
     'registration': false,
     'document_image': false,
     'images': [],
+    'created_at': null, // Add timestamp for when hotel is created
   };
 
   final List<File> _images = [];
@@ -59,6 +61,7 @@ class HotelProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  // Image handling methods remain the same
   Future<void> pickImages() async {
     final pickedFiles = await ImagePicker().pickMultiImage();
     if (pickedFiles.isNotEmpty) {
@@ -116,12 +119,10 @@ class HotelProvider extends ChangeNotifier {
     _imageUrls.clear();
     notifyListeners();
   }
-  //Drop down box items
 
+  // Dropdown items remain the same
   String? _selectedItem;
-
   final List<String> items = ['Hotel', 'Resort', 'Bunglow', 'Dorm'];
-
   String? get selectedItem => _selectedItem;
 
   void setSelectedItem(String? value) {
@@ -129,38 +130,54 @@ class HotelProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future submitHotel() async {
+  Future<String?> submitHotel() async {
     try {
+      // Get the current user's ID
+      // String userId = FirebaseAuth.instance.currentUser!.uid;
+
+      // Create a new document reference with auto-generated ID
+      DocumentReference docRef = _firestore.collection('hotels').doc();
+      hotelId = docRef.id; // Use the auto-generated ID as hotel ID
+
       if (_imageUrls.isNotEmpty) {
         hotelData['images'] = _imageUrls;
       }
 
-      String userId = FirebaseAuth.instance.currentUser!.uid;
-      // hotelData['userId'] = userId;
-      // hotelId = userId;
+      // Add user ID and creation timestamp to hotel data
+      // hotelData['userId'] = hotelId;
+      // hotelData['created_at'] = FieldValue.serverTimestamp();
 
-      await _firestore.collection('hotels').doc(userId).set(hotelData);
+      // Save to Firestore using the auto-generated ID
+      await docRef.set(hotelData);
 
-      // SharedPreferences prefs = await SharedPreferences.getInstance();
-      // await prefs.setString('hotelId', hotelId!);
+      // Save hotel ID to SharedPreferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('hotelId', hotelId!);
 
       log('Hotel submitted successfully with ID: $hotelId');
       clearImages();
+      return hotelId;
     } catch (e) {
       debugPrint('Error submitting hotel: $e');
+      return null;
     }
-    return hotelId;
   }
 
   Future<String?> checkHotelRegistration() async {
     try {
       String userId = FirebaseAuth.instance.currentUser!.uid;
-      DocumentSnapshot hotelDoc =
-          await _firestore.collection('hotels').doc(userId).get();
 
-      if (hotelDoc.exists) {
-        log('Hotel already registered: $userId');
-        return userId;
+      // Query hotels collection for documents where userId matches
+      QuerySnapshot hotelQuery = await _firestore
+          .collection('hotels')
+          .where('userId', isEqualTo: userId)
+          .limit(1)
+          .get();
+
+      if (hotelQuery.docs.isNotEmpty) {
+        hotelId = hotelQuery.docs.first.id;
+        log('Hotel already registered with ID: $hotelId');
+        return hotelId;
       } else {
         log('Hotel not registered');
         return null;
@@ -171,45 +188,82 @@ class HotelProvider extends ChangeNotifier {
     }
   }
 
-  /// Method to get the current user's ID (UID)
   String? getUserId() {
-    // Get the current user from FirebaseAuth
     User? user = FirebaseAuth.instance.currentUser;
-
-    // Return the user ID (UID) if the user is logged in, otherwise return null
-    if (user != null) {
-      return user.uid;
-    } else {
-      return null;
-    }
+    return user?.uid;
   }
 
-  /// New Method: Get current hotel details
   Future<Map<String, dynamic>?> getCurrentHotelDetails() async {
     try {
-      String? userId = getUserId(); // Get the current user's UID
-
-      if (userId == null) {
-        log('User is not logged in');
-        return null; // If user is not logged in, return null
+      if (hotelId == null) {
+        // Try to get hotel ID from registration check
+        hotelId = await checkHotelRegistration();
+        if (hotelId == null) {
+          log('No hotel ID found');
+          return null;
+        }
       }
 
+      // Get hotel document using hotel ID
       DocumentSnapshot hotelDoc =
-          await _firestore.collection('hotels').doc(userId).get();
+          await _firestore.collection('hotels').doc(hotelId).get();
 
       if (hotelDoc.exists) {
         Map<String, dynamic> hotelDetails =
             hotelDoc.data() as Map<String, dynamic>;
-
-        log('Fetched current hotel details for userId: $userId');
+        log('Fetched current hotel details for hotelId: $hotelId');
         return hotelDetails;
       } else {
-        log('No hotel found for userId: $userId');
+        log('No hotel found for hotelId: $hotelId');
         return null;
       }
     } catch (e) {
       debugPrint('Error fetching current hotel details: $e');
       return null;
+    }
+  }
+
+  // Method to update existing hotel
+  Future<bool> updateHotel() async {
+    try {
+      if (hotelId == null) {
+        log('No hotel ID available for update');
+        return false;
+      }
+
+      if (_imageUrls.isNotEmpty) {
+        hotelData['images'] = _imageUrls;
+      }
+
+      await _firestore.collection('hotels').doc(hotelId).update(hotelData);
+      log('Hotel updated successfully: $hotelId');
+      return true;
+    } catch (e) {
+      debugPrint('Error updating hotel: $e');
+      return false;
+    }
+  }
+
+  // Method to delete hotel
+  Future<bool> deleteHotel() async {
+    try {
+      if (hotelId == null) {
+        log('No hotel ID available for deletion');
+        return false;
+      }
+
+      await _firestore.collection('hotels').doc(hotelId).delete();
+
+      // Clear SharedPreferences
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove('hotelId');
+
+      hotelId = null;
+      log('Hotel deleted successfully');
+      return true;
+    } catch (e) {
+      debugPrint('Error deleting hotel: $e');
+      return false;
     }
   }
 }

@@ -43,7 +43,7 @@ class DetailFinalReviewCard extends StatelessWidget {
 
             InfoCard(
               title: 'Booking Since',
-              value: hotelData['Booking_Since'],
+              value: hotelData['Booking_since'],
             ),
             const SectionTitle(title: 'Contact Details'),
             InfoCard(

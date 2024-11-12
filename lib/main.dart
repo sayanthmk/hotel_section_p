@@ -47,9 +47,9 @@ class MyApp extends StatelessWidget {
           // fontFamily: 'Montserrat',
           primarySwatch: Colors.blue,
         ),
-        // home: AuthWrapper(),
+        home: AuthWrapper(),
 
-        home: RoomsSubmissionPage(),
+        // home: RoomsSubmissionPage(),
       ),
     );
   }

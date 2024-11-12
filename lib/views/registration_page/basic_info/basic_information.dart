@@ -84,8 +84,8 @@ class BasicInformation extends StatelessWidget {
                   if (_formKey.currentState!.validate()) {
                     hotelProvider.updateHotelData(
                         'hotel_name', hotelNameController.text);
-                    hotelProvider.updateHotelData('Booking_since',
-                        int.parse(bookingSinceController.text));
+                    hotelProvider.updateHotelData(
+                        'Booking_since', bookingSinceController.text);
                     hotelProvider.updateHotelData(
                         'contact_number', contactNumberController.text);
                     hotelProvider.updateHotelData(

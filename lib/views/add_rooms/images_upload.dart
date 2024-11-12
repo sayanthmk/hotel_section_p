@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/field_information/roomprovider.dart';
@@ -170,20 +168,25 @@ class RoomImageUploadPage extends StatelessWidget {
       ),
       floatingActionButton: hotelProvider.roomImages.length < 10
           ? FloatingActionButton(
-              // onPressed: () => _showImagePickerDialog(context, hotelProvider),
               onPressed: () {
-                CustomAlertDialog(
-                  contentText: 'Choose how you want to add images',
-                  titleText: 'Add Images',
-                  buttonText1: 'Take Photo',
-                  buttonText2: 'Choose from Gallery',
-                  onPressButton1: () async {
-                    await hotelProvider.captureRoomImage();
-                    Navigator.of(context).pop();
-                  },
-                  onPressButton2: () async {
-                    await hotelProvider.pickRoomImages();
-                    Navigator.of(context).pop();
+                // Show the custom alert dialog using showDialog
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CustomAlertDialog(
+                      contentText: 'Choose how you want to add images',
+                      titleText: 'Add Images',
+                      buttonText1: 'Take Photo',
+                      buttonText2: 'Choose from Gallery',
+                      onPressButton1: () async {
+                        await hotelProvider.captureRoomImage();
+                        Navigator.of(context).pop();
+                      },
+                      onPressButton2: () async {
+                        await hotelProvider.pickRoomImages();
+                        Navigator.of(context).pop();
+                      },
+                    );
                   },
                 );
               },
@@ -193,6 +196,7 @@ class RoomImageUploadPage extends StatelessWidget {
           : null,
     );
   }
+}
 
   // void _showImagePickerDialog(
   //     BuildContext context, RoomProvider hotelProvider) {
@@ -216,7 +220,7 @@ class RoomImageUploadPage extends StatelessWidget {
   //     },
   //   );
   // }
-}
+
     // Pick Image from Gallery
           // ElevatedButton(
           //   onPressed: () async {

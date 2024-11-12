@@ -16,7 +16,6 @@ class RoomProvider extends ChangeNotifier {
     "Select Extra Bed Types": 0,
     "Cupboard": false,
     "Wardrobe": false,
-    // "Accommodation Only": false,
     "Free Breakfast": false,
     "Free Lunch": false,
     "Free Dinner": false,

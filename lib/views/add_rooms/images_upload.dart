@@ -1,7 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/field_information/roomprovider.dart';
-import 'package:hotel_side/views/add_rooms/room_final_review.dart';
+import 'package:hotel_side/views/add_rooms/room_final_review/room_final_review.dart';
 import 'package:hotel_side/widgets/home_page_widgets/alert_box.dart';
 import 'package:hotel_side/widgets/home_page_widgets/button.dart';
 import 'package:provider/provider.dart';
@@ -176,8 +178,8 @@ class RoomImageUploadPage extends StatelessWidget {
                     return CustomAlertDialog(
                       contentText: 'Choose how you want to add images',
                       titleText: 'Add Images',
-                      buttonText1: 'Take Photo',
-                      buttonText2: 'Choose from Gallery',
+                      buttonText1: 'Camera',
+                      buttonText2: 'Gallery',
                       onPressButton1: () async {
                         await hotelProvider.captureRoomImage();
                         Navigator.of(context).pop();
@@ -197,104 +199,3 @@ class RoomImageUploadPage extends StatelessWidget {
     );
   }
 }
-
-  // void _showImagePickerDialog(
-  //     BuildContext context, RoomProvider hotelProvider) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return CustomAlertDialog(
-  //         contentText: 'Choose how you want to add images',
-  //         titleText: 'Add Images',
-  //         buttonText1: 'Take Photo',
-  //         buttonText2: 'Choose from Gallery',
-  //         onPressButton1: () async {
-  //           await hotelProvider.captureRoomImage();
-  //           Navigator.of(context).pop();
-  //         },
-  //         onPressButton2: () async {
-  //           await hotelProvider.pickRoomImages();
-  //           Navigator.of(context).pop();
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
-
-    // Pick Image from Gallery
-          // ElevatedButton(
-          //   onPressed: () async {
-          //     await hotelProvider.pickRoomImages(); // Picks multiple images
-          //   },
-          //   child: const Text('Pick Room Images from Gallery'),
-          // ),
-          // const SizedBox(height: 10),
-          // // Capture Image from Camera
-          // ElevatedButton(
-          //   onPressed: () async {
-          //     await hotelProvider
-          //         .captureRoomImage(); // Captures image from camera
-          //   },
-          //   child: const Text('Capture Room Image with Camera'),
-          // ),
-               // ElevatedButton(
-          //   onPressed: () async {
-          //     final success = await hotelProvider.uploadRoomImages();
-          //     if (success) {
-          //       // If images uploaded successfully, submit the room data
-          //       // await hotelProvider.submitRoom();
-          //       ScaffoldMessenger.of(context).showSnackBar(
-          //         const SnackBar(content: Text('Room added successfully!')),
-          //       );
-          //       Navigator.pushReplacement(
-          //         context,
-          //         MaterialPageRoute(
-          //             builder: (context) => RoomsSubmissionPage()),
-          //       );
-          //     } else {
-          //       ScaffoldMessenger.of(context).showSnackBar(
-          //         const SnackBar(content: Text('Failed to upload images')),
-          //       );
-          //     }
-          //   },
-          //   child: hotelProvider.isRoomUploading
-          //       ? const CircularProgressIndicator(color: Colors.white)
-          //       : const Text('Submit Images'),
-          // ),
-               // Container(
-            //   padding: const EdgeInsets.all(16),
-            //   color: Colors.white,
-            //   child: Column(
-            //     children: [
-            //       const Text(
-            //         'Add Photos of Your Room',
-            //         style: TextStyle(
-            //           fontSize: 24,
-            //           fontWeight: FontWeight.bold,
-            //           color: Color(0xff1E91B6),
-            //         ),
-            //       ),
-            //       const SizedBox(height: 8),
-            //       Text(
-            //         'Upload high-quality images to showcase your room (${hotelProvider.roomImages.length}/10)',
-            //         style: TextStyle(
-            //           fontSize: 14,
-            //           color: Colors.grey[600],
-            //         ),
-            //         textAlign: TextAlign.center,
-            //       ),
-            //     ],
-            //   ),
-            // ),
-                 // const SizedBox(height: 8),
-                      // ElevatedButton.icon(
-                      //   onPressed: () =>
-                      //       _showImagePickerDialog(context, hotelProvider),
-                      //   icon: const Icon(Icons.add_a_photo),
-                      //   label: const Text('Add Images'),
-                      //   style: ElevatedButton.styleFrom(
-                      //     backgroundColor: const Color(0xff1E91B6),
-                      //     padding: const EdgeInsets.symmetric(
-                      //         horizontal: 20, vertical: 12),
-                      //   ),
-                      // ),

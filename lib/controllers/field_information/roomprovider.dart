@@ -11,7 +11,7 @@ class RoomProvider extends ChangeNotifier {
 
   final Map<String, dynamic> roomData = {
     "room_area": '',
-    "room_type": '', // Corrected typo here
+    "room_type": '',
     "Property Size": 0,
     "Select Extra Bed Types": 0,
     "Cupboard": false,
@@ -120,7 +120,7 @@ class RoomProvider extends ChangeNotifier {
 
       // Retrieve the document for this user (hotel)
       DocumentSnapshot hotelDoc =
-          await _firestore.collection('hotels').doc(userId).get();
+          await _firestore.collection('approved_hotels').doc(userId).get();
 
       // Check if the document exists and has data
       if (!hotelDoc.exists) {
@@ -136,11 +136,18 @@ class RoomProvider extends ChangeNotifier {
         roomData['room_images'] = _roomImageUrls;
       }
 
-      await _firestore
-          .collection('hotels')
+      DocumentReference roomRef = await _firestore
+          .collection('approved_hotels')
           .doc(hotelId)
           .collection('rooms')
           .add(roomData);
+      // Get the room ID from the document reference
+      String roomId = roomRef.id;
+
+      // Update the room data with the room ID
+      await roomRef.update({'room_id': roomId});
+
+      log('Room added to hotel with ID: $hotelId, Room ID: $roomId');
 
       log('Room added to hotel with ID: $hotelId');
       clearRoomImages();
@@ -149,85 +156,7 @@ class RoomProvider extends ChangeNotifier {
     }
   }
 
-  // Future<void> getRooms() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   String? hotelId = prefs.getString('hotelId');
-
-  //   log('hotel id in getrooms   $hotelId!');
-  //   if (hotelId == null) {
-  //     log('Hotel ID is null,  please submit the hotel first.');
-  //     throw Exception('Hotel ID is null. Please submit the hotel first.');
-  //   }
-  //   try {
-  //     // Fetch rooms from Firestore where the hotelId matches
-  //     QuerySnapshot roomSnapshot = await _firestore
-  //         .collection('hotels')
-  //         .doc(hotelId)
-  //         .collection('rooms')
-  //         .get();
-
-  //     // Clear any previous room data
-  //     _roomList.clear();
-
-  //     // Add the rooms to the _roomList
-  //     for (var doc in roomSnapshot.docs) {
-  //       _roomList.add(doc.data() as Map<String, dynamic>);
-  //     }
-
-  //     log('Rooms fetched for hotel: $hotelId');
-  //     notifyListeners();
-  //   } catch (e) {
-  //     log('Error fetching rooms: $e');
-  //     throw Exception('Failed to fetch rooms. Error: $e');
-  //   }
-  // }
   Future<void> getRooms() async {
-    try {
-      // Fetch the userId of the current user (this will be the document ID in the 'hotels' collection)
-      String userId = FirebaseAuth.instance.currentUser!.uid;
-
-      // Retrieve the document for this user (hotel)
-      DocumentSnapshot hotelDoc =
-          await _firestore.collection('hotels').doc(userId).get();
-
-      // Check if the document exists and has data
-      if (!hotelDoc.exists) {
-        log('Hotel document does not exist for userId: $userId');
-        throw Exception(
-            'Hotel document does not exist. Please submit the hotel first.');
-      }
-
-      // Extract the hotelId from the document's data (assuming hotelId is a field in the document)
-      String? hotelId =
-          userId; // Adjust the key based on your Firestore document structure
-
-      log('Hotel ID fetched: $hotelId');
-
-      // Fetch rooms from Firestore where the hotelId matches
-      QuerySnapshot roomSnapshot = await _firestore
-          .collection('hotels')
-          .doc(hotelId)
-          .collection('rooms')
-          .get();
-
-      // Clear any previous room data
-      _roomList.clear();
-
-      // Add the rooms to the _roomList
-      for (var doc in roomSnapshot.docs) {
-        _roomList.add(doc.data() as Map<String, dynamic>);
-      }
-
-      log('Rooms fetched for hotel: $hotelId');
-      notifyListeners();
-    } catch (e) {
-      log('Error fetching rooms: $e');
-      throw Exception('Failed to fetch rooms. Error: $e');
-    }
-  }
-
-  //rroms from approved
-  Future<void> getApprovedRooms() async {
     try {
       // Fetch the userId of the current user (this will be the document ID in the 'hotels' collection)
       String userId = FirebaseAuth.instance.currentUser!.uid;
@@ -271,6 +200,7 @@ class RoomProvider extends ChangeNotifier {
       throw Exception('Failed to fetch rooms. Error: $e');
     }
   }
+
   //Drop down box items
 
   String? _roomsselectedItem;
@@ -299,7 +229,7 @@ class RoomProvider extends ChangeNotifier {
 
       // Check if the hotel document exists for this user
       DocumentSnapshot hotelDoc =
-          await _firestore.collection('hotels').doc(userId).get();
+          await _firestore.collection('approved_hotels').doc(userId).get();
       if (!hotelDoc.exists) {
         log('Hotel document does not exist for userId: $userId');
         throw Exception(
@@ -308,12 +238,12 @@ class RoomProvider extends ChangeNotifier {
 
       // Perform the update on the specified room
       await _firestore
-          .collection('hotels')
+          .collection('approved_hotels')
           .doc(userId)
           .collection('rooms')
           .doc(roomId)
           .update(updatedData);
-      log('Room updated with ID: $roomId');
+      // log('Room updated with ID: $roomId');
       notifyListeners();
     } catch (e) {
       log('Error updating room: $e');
@@ -329,13 +259,18 @@ class RoomProvider extends ChangeNotifier {
 
       // Check if the hotel document exists for this user
       DocumentSnapshot hotelDoc =
-          await _firestore.collection('hotels').doc(userId).get();
+          await _firestore.collection('approved_hotels').doc(userId).get();
       if (!hotelDoc.exists) {
         log('Hotel document does not exist for userId: $userId');
         throw Exception(
             'Hotel document does not exist. Please submit the hotel first.');
       }
-
+      await _firestore
+          .collection('approved_hotels')
+          .doc(userId)
+          .collection('rooms')
+          .doc(roomId)
+          .delete();
       // Perform the delete operation on the specified room
       log('Room deleted with ID: $roomId');
       notifyListeners();
@@ -345,3 +280,82 @@ class RoomProvider extends ChangeNotifier {
     }
   }
 }
+
+  // Future<void> getRooms() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   String? hotelId = prefs.getString('hotelId');
+
+  //   log('hotel id in getrooms   $hotelId!');
+  //   if (hotelId == null) {
+  //     log('Hotel ID is null,  please submit the hotel first.');
+  //     throw Exception('Hotel ID is null. Please submit the hotel first.');
+  //   }
+  //   try {
+  //     // Fetch rooms from Firestore where the hotelId matches
+  //     QuerySnapshot roomSnapshot = await _firestore
+  //         .collection('hotels')
+  //         .doc(hotelId)
+  //         .collection('rooms')
+  //         .get();
+
+  //     // Clear any previous room data
+  //     _roomList.clear();
+
+  //     // Add the rooms to the _roomList
+  //     for (var doc in roomSnapshot.docs) {
+  //       _roomList.add(doc.data() as Map<String, dynamic>);
+  //     }
+
+  //     log('Rooms fetched for hotel: $hotelId');
+  //     notifyListeners();
+  //   } catch (e) {
+  //     log('Error fetching rooms: $e');
+  //     throw Exception('Failed to fetch rooms. Error: $e');
+  //   }
+  // }
+  
+  //rroms from approved
+  // Future<void> getApprovedRooms() async {
+  //   try {
+  //     // Fetch the userId of the current user (this will be the document ID in the 'hotels' collection)
+  //     String userId = FirebaseAuth.instance.currentUser!.uid;
+
+  //     // Retrieve the document for this user (hotel)
+  //     DocumentSnapshot hotelDoc =
+  //         await _firestore.collection('approved_hotels').doc(userId).get();
+
+  //     // Check if the document exists and has data
+  //     if (!hotelDoc.exists) {
+  //       log('Hotel document does not exist for userId: $userId');
+  //       throw Exception(
+  //           'Hotel document does not exist. Please submit the hotel first.');
+  //     }
+
+  //     // Extract the hotelId from the document's data (assuming hotelId is a field in the document)
+  //     String? hotelId =
+  //         userId; // Adjust the key based on your Firestore document structure
+
+  //     log('Hotel ID fetched: $hotelId');
+
+  //     // Fetch rooms from Firestore where the hotelId matches
+  //     QuerySnapshot roomSnapshot = await _firestore
+  //         .collection('approved_hotels')
+  //         .doc(hotelId)
+  //         .collection('rooms')
+  //         .get();
+
+  //     // Clear any previous room data
+  //     _roomList.clear();
+
+  //     // Add the rooms to the _roomList
+  //     for (var doc in roomSnapshot.docs) {
+  //       _roomList.add(doc.data() as Map<String, dynamic>);
+  //     }
+
+  //     log('Rooms fetched for hotel: $hotelId');
+  //     notifyListeners();
+  //   } catch (e) {
+  //     log('Error fetching rooms: $e');
+  //     throw Exception('Failed to fetch rooms. Error: $e');
+  //   }
+  // }

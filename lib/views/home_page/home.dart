@@ -22,19 +22,57 @@ class HomePage extends StatelessWidget {
           children: [
             Text('Welcome, ${authService.currentUser?.email ?? 'User'}!'),
             const SizedBox(height: 16),
-            FutureBuilder<Map<String, dynamic>?>(
-              future: hotelProvider
-                  .getCurrentHotelDetails(), // Call to fetch current hotel details
+            FutureBuilder<String?>(
+              future: hotelProvider.hotelPermission(), // Check hotel permission
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator(); // Loading indicator
                 } else if (snapshot.hasError) {
                   return Text('Error: ${snapshot.error}'); // Show error if any
-                } else if (!snapshot.hasData || snapshot.data == null) {
-                  return const Text(
-                      'No hotel details available.'); // Show if no hotel details
+                } else if (snapshot.data != null) {
+                  // Hotel is permitted
+                  return Container(
+                    width: 200,
+                    height: 50,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.green, // Green color for permitted
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Text(
+                      'Hotel is Permitted',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  );
                 } else {
-                  // Extract hotel data from the snapshot
+                  // Hotel is not permitted
+                  return Container(
+                    width: 200,
+                    height: 50,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      color: Colors.red, // Red color for not permitted
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: const Text(
+                      'Hotel is Not Permitted',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  );
+                }
+              },
+            ),
+            const SizedBox(height: 16),
+            FutureBuilder<Map<String, dynamic>?>(
+              future: hotelProvider.getCurrentHotelDetails(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                } else if (!snapshot.hasData || snapshot.data == null) {
+                  return const Text('No hotel details available.');
+                } else {
                   final hotelDetails = snapshot.data!;
                   return Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -52,22 +90,12 @@ class HomePage extends StatelessWidget {
                               title: 'Hotel Name',
                               value: hotelDetails['hotel_name'] ?? 'hotel name',
                             ),
-                            // const InfoItem(
-                            //   icon: Icons.person,
-                            //   title: 'Nick Name',
-                            //   value: 'r.denial',
-                            // ),
                             InfoItem(
                               icon: Icons.location_on,
                               title: 'Location',
                               value:
                                   '${hotelDetails['city']},${hotelDetails['state']}',
                             ),
-                            // const InfoItem(
-                            //   icon: Icons.work,
-                            //   title: 'Occupation',
-                            //   value: 'Software Developer',
-                            // ),
                             InfoItem(
                               icon: Icons.phone,
                               title: 'Contact Number',
@@ -78,18 +106,6 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                   );
-                  // return Column(
-                  //   crossAxisAlignment: CrossAxisAlignment.center,
-                  //   children: [
-                  //     Text(
-                  //         'Hotel Name: ${hotelDetails['hotel_name'] ?? 'N/A'}'),
-                  //     Text(
-                  //         'Hotel Type: ${hotelDetails['hotel_type'] ?? 'N/A'}'),
-                  //     Text('City: ${hotelDetails['city'] ?? 'N/A'}'),
-                  //     Text('Country: ${hotelDetails['country'] ?? 'N/A'}'),
-                  //     // Add more hotel details here
-                  //   ],
-                  // );
                 }
               },
             ),
@@ -102,13 +118,6 @@ class HomePage extends StatelessWidget {
                 ));
               },
             ),
-            // const SizedBox(height: 16),
-            // ElevatedButton(
-            //   child: const Text('Sign Out'),
-            //   onPressed: () async {
-            //     await authService.signOut();
-            //   },
-            // ),
           ],
         ),
       ),

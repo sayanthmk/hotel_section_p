@@ -24,14 +24,11 @@ class DetailFinalReviewCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // _buildSectionTitle('Basic Information'),
             const SectionTitle(title: 'Basic Information'),
             InfoCard(
               title: 'Hotel Type',
               value: hotelData['hotel_type'],
             ),
-            // _buildInfoCard('Hotel Type', hotelData['hotel_type']),
-
             InfoCard(
               title: 'Property Setup',
               value: hotelData['property_setup'],
@@ -40,7 +37,6 @@ class DetailFinalReviewCard extends StatelessWidget {
               title: 'Hotel Name',
               value: hotelData['hotel_name'],
             ),
-
             InfoCard(
               title: 'Booking Since',
               value: hotelData['Booking_since'],
@@ -71,7 +67,6 @@ class DetailFinalReviewCard extends StatelessWidget {
               title: 'Pincode',
               value: hotelData['pincode'],
             ),
-
             const SectionTitle(title: 'Legal Information'),
             InfoCard(
               title: 'PAN number',
@@ -85,7 +80,6 @@ class DetailFinalReviewCard extends StatelessWidget {
               title: 'GST Number',
               value: hotelData['gst_number'],
             ),
-
             const SectionTitle(title: 'Facilities & Features'),
             Wrap(
               spacing: 8,
@@ -117,7 +111,6 @@ class DetailFinalReviewCard extends StatelessWidget {
                 ),
               ],
             ),
-            // _buildSectionTitle('Hotel Images'),
             const SectionTitle(title: 'Hotel Images'),
             const ImageListView(),
           ],
@@ -126,20 +119,3 @@ class DetailFinalReviewCard extends StatelessWidget {
     );
   }
 }
-             // _buildFacilityChip(
-                //     'Leased', hotelData['leased'] ?? false),
-                // _buildFacilityChip(
-                //     'Registered', hotelData['registartion'] ?? false),
-                // _buildFacilityChip('Free Cancellation',
-                //     hotelData['free_cancel'] ?? false),
-                // _buildFacilityChip('Couple Friendly',
-                //     hotelData['couple_friendly'] ?? false),
-                // _buildFacilityChip('Parking Available',
-                //     hotelData['parking_facility'] ?? false),
-                // _buildFacilityChip('Restaurant',
-                //     hotelData['restaurant_facility'] ?? false),
-                            // _buildInfoCard('PAN Number', hotelData['pan_number']),
-            // _buildInfoCard(
-            //     'Property Number', hotelData['property_number']),
-            // _buildInfoCard('GST Number', hotelData['gst_number']),
-            // _buildSectionTitle('Facilities & Features'),

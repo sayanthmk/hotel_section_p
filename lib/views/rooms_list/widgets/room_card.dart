@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/views/rooms_list/room_detail_view.dart';
+import 'package:hotel_side/views/rooms_list/room_detail_view/room_detail_view.dart';
 import 'package:hotel_side/views/rooms_list/widgets/feature_card.dart';
 
 class RoomCard extends StatelessWidget {

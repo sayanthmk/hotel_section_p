@@ -20,10 +20,8 @@ class BottomNavScreen extends StatelessWidget {
     final provider = Provider.of<WidgetsController>(context);
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Bottom Navigation Example'),
-      // ),
-      body: pages[provider.currentIndex], // Display the selected page
+   
+      body: pages[provider.currentIndex], 
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,

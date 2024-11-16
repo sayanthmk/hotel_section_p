@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/field_information/roomprovider.dart';
-import 'package:hotel_side/views/registration_page/success_screen.dart';
 import 'package:hotel_side/views/rooms_list/rooms_list.dart';
 import 'package:provider/provider.dart';
 
@@ -15,7 +14,6 @@ class RoomsSubmissionPage extends StatelessWidget {
 
     final cupboard = roomdata['Cupboard'] ?? false;
     final wardrobe = roomdata['Wardrobe'] ?? false;
-    // final accommodation = roomdata['Accommodation Only'] ?? false;
     final breakfast = roomdata['Free Breakfast'] ?? false;
     final lunch = roomdata['Free Lunch'] ?? false;
     final dinner = roomdata['Free Dinner'] ?? false;
@@ -145,31 +143,3 @@ class RoomsSubmissionPage extends StatelessWidget {
     );
   }
 }
-  // Text(
-            //     'Property Setup: ${hotelData['property_setup'] ?? 'Value not provided'}'),
-            // Text('Property Setup: ${hotelData[''] ?? 'Value not provided'}'),
-            // Text(
-            //     'Property Setup: ${hotelData['property_setup'] ?? 'Value not provided'}'),
-            // Text(
-            //     'Hotel Name: ${hotelData['hotel_name'] ?? 'Value not provided'}'),
-            // Text(
-            //     'Booking Since: ${hotelData['Booking_since'] ?? 'Value not provided'}'),
-            // Text(
-            //     'Contact Number: ${hotelData['contact_number'] ?? 'Value not provided'}'),
-            // Text(
-            //     'Email Address: ${hotelData['email_address'] ?? 'Value not provided'}'),
-            // Text('City: ${hotelData['city'] ?? 'Value not provided'}'),
-            // Text('State: ${hotelData['state'] ?? 'Value not provided'}'),
-            // Text('Country: ${hotelData['country'] ?? 'Value not provided'}'),
-            // Text(
-            //     'Pincode: ${hotelData['pincode']?.toString() ?? 'Value not provided'}'),
-             // log('Hotel Type: ${hotelData['hotel_type']}');
-                // log('Property Setup: ${hotelData['property_setup']}');
-                // log('Contact Number: ${hotelData['info']?['contact_number']}');
-                // log('State: ${hotelData['location']?['state']}');
-                // Text(
-            //     'pan_number: ${hotelData['pan_number'] ?? 'Value not provided'}'),
-            // Text(
-            //     'property_number: ${hotelData['property_number'] ?? 'Value not provided'}'),
-            // Text(
-            //     'gst_number: ${hotelData['gst_number'] ?? 'Value not provided'}'),

@@ -3,7 +3,7 @@ import 'package:hotel_side/controllers/auth_service/auth_service.dart';
 import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
 import 'package:hotel_side/views/bottom_nav/bottom_nav.dart';
 import 'package:hotel_side/views/registration_page/entry_page.dart';
-import 'package:hotel_side/views/registration_page/success_screen.dart';
+import 'package:hotel_side/unwanted/success_screen.dart';
 import 'package:provider/provider.dart';
 
 class HotelCheckPage extends StatelessWidget {

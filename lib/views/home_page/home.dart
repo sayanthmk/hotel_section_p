@@ -44,7 +44,7 @@ class HomePage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         child: Column(
                           children: [
                             InfoItem(
@@ -52,22 +52,22 @@ class HomePage extends StatelessWidget {
                               title: 'Hotel Name',
                               value: hotelDetails['hotel_name'] ?? 'hotel name',
                             ),
-                            InfoItem(
-                              icon: Icons.person,
-                              title: 'Nick Name',
-                              value: 'r.denial',
-                            ),
+                            // const InfoItem(
+                            //   icon: Icons.person,
+                            //   title: 'Nick Name',
+                            //   value: 'r.denial',
+                            // ),
                             InfoItem(
                               icon: Icons.location_on,
                               title: 'Location',
                               value:
                                   '${hotelDetails['city']},${hotelDetails['state']}',
                             ),
-                            InfoItem(
-                              icon: Icons.work,
-                              title: 'Occupation',
-                              value: 'Software Developer',
-                            ),
+                            // const InfoItem(
+                            //   icon: Icons.work,
+                            //   title: 'Occupation',
+                            //   value: 'Software Developer',
+                            // ),
                             InfoItem(
                               icon: Icons.phone,
                               title: 'Contact Number',

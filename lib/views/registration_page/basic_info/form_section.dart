@@ -10,6 +10,7 @@ class BasicInfoFormSection extends StatelessWidget {
     required this.bookingSinceController,
     required this.contactNumberController,
     required this.emailAddressController,
+    required this.basePriceController,
   }) : _formKey = formKey;
 
   final GlobalKey<FormState> _formKey;
@@ -17,6 +18,7 @@ class BasicInfoFormSection extends StatelessWidget {
   final TextEditingController bookingSinceController;
   final TextEditingController contactNumberController;
   final TextEditingController emailAddressController;
+  final TextEditingController basePriceController;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,7 @@ class BasicInfoFormSection extends StatelessWidget {
                 //   title: 'Basic Information',
                 //   icon: Icons.hotel,
                 // ),
-                SectionHeader(
+                const SectionHeader(
                   title: 'Basic Information',
                   icon: Icons.hotel,
                 ),
@@ -47,6 +49,26 @@ class BasicInfoFormSection extends StatelessWidget {
                     padding: const EdgeInsets.all(16.0),
                     child: Column(
                       children: [
+                        CustomTextFormField(
+                          controller: basePriceController,
+                          labelText: 'Base Price',
+                          hintText: 'Enter the base price',
+                          prefixIcon: const Icon(Icons.business),
+                          keyboardType: TextInputType.text,
+                          textInputAction: TextInputAction.next,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Base price is required';
+                            }
+                            return null;
+                          },
+                          borderColor: Colors.grey.shade300,
+                          focusedBorderColor: const Color(0xff1E91B6),
+                          enabledBorderColor: Colors.grey.shade300,
+                          errorBorderColor: Colors.red,
+                        ),
+                        const SizedBox(height: 16),
                         CustomTextFormField(
                           controller: hotelNameController,
                           labelText: 'Stay/Hotel Name',
@@ -99,7 +121,7 @@ class BasicInfoFormSection extends StatelessWidget {
                 //   title: 'Contact Details',
                 //   icon: Icons.contact_phone,
                 // ),
-                SectionHeader(
+                const SectionHeader(
                     title: 'Contact Details', icon: Icons.contact_phone),
                 Card(
                   elevation: 2,

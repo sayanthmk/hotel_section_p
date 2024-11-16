@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class EnhancedBookingCard extends StatelessWidget {
   final int count;
-  final Widget percentageChangeWidget; // Change this to accept any widget
-  final Gradient gradient; // Change this to accept only a gradient
+  final Widget percentageChangeWidget; 
+  final Gradient gradient; 
   final String heading;
-  final IconData icon; // Icon data for the icon
-  final Color iconColor; // Color for the icon
-  final Color iconBackgroundColor; // Background color for the icon
+  final IconData icon; 
+  final Color iconColor; 
+  final Color iconBackgroundColor; 
 
   const EnhancedBookingCard({
     super.key,
@@ -15,14 +15,14 @@ class EnhancedBookingCard extends StatelessWidget {
     this.heading = '',
     this.percentageChangeWidget = const SizedBox(),
     this.gradient = const LinearGradient(
-      // Provide a default gradient
+     
       colors: [Colors.grey, Colors.white],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     ),
-    this.icon = Icons.book, // Default icon
-    this.iconColor = Colors.blue, // Default icon color
-    this.iconBackgroundColor = Colors.blueAccent, // Default background color
+    this.icon = Icons.book, 
+    this.iconColor = Colors.blue,
+    this.iconBackgroundColor = Colors.blueAccent, 
   });
 
   @override
@@ -49,16 +49,16 @@ class EnhancedBookingCard extends StatelessWidget {
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color:
-                          iconBackgroundColor, // Use the passed background color here
+                          iconBackgroundColor, 
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Icon(
-                      icon, // Use the passed icon here
-                      color: iconColor, // Use the passed icon color here
+                      icon, 
+                      color: iconColor, 
                       size: 24,
                     ),
                   ),
-                  percentageChangeWidget, // Use the passed widget here
+                  percentageChangeWidget, 
                 ],
               ),
               const SizedBox(height: 10),
@@ -89,64 +89,3 @@ class EnhancedBookingCard extends StatelessWidget {
   }
 }
 
-
-    // const SizedBox(width: 8),
-                  // Container(
-                  //   width: 6,
-                  //   height: 6,
-                  //   decoration: BoxDecoration(
-                  //     color: Colors.grey[400],
-                  //     shape: BoxShape.circle,
-                  //   ),
-                  // ),
-                  // const SizedBox(width: 8),
-                  // Text(
-                  //   'This Month',
-                  //   style: TextStyle(
-                  //     color: Colors.grey[500],
-                  //     fontSize: 14,
-                  //   ),
-                  // ),
-                      // Container(
-                  //   padding: const EdgeInsets.symmetric(
-                  //     horizontal: 12,
-                  //     vertical: 6,
-                  //   ),
-                  //   decoration: BoxDecoration(
-                  //     color: percentageChange >= 0
-                  //         ? Colors.green[100]
-                  //         : Colors.red[100],
-                  //     borderRadius: BorderRadius.circular(20),
-                  //   ),
-                  //   child: Row(
-                  //     children: [
-                  //       Icon(
-                  //         percentageChange >= 0
-                  //             ? Icons.arrow_upward
-                  //             : Icons.arrow_downward,
-                  //         color: percentageChange >= 0
-                  //             ? Colors.green[700]
-                  //             : Colors.red[700],
-                  //         size: 16,
-                  //       ),
-                  //       const SizedBox(width: 4),
-                  //       Text(
-                  //         '${percentageChange.abs().toStringAsFixed(1)}%',
-                  //         style: TextStyle(
-                  //           color: percentageChange >= 0
-                  //               ? Colors.green[700]
-                  //               : Colors.red[700],
-                  //           fontWeight: FontWeight.bold,
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
-                     // gradient: LinearGradient(
-          //   begin: Alignment.topLeft,
-          //   end: Alignment.bottomRight,
-          //   colors: [
-          //     Colors.blue[50]!,
-          //     Colors.blue[100]!,
-          //   ],
-          // ),

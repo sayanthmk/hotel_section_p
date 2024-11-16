@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_side/constants/colors/colors.dart';
-import 'package:hotel_side/controllers/auth_service/auth_service.dart';
 import 'package:hotel_side/views/dashboard/grid_container/custom_card.dart';
 import 'package:hotel_side/views/dashboard/grid_container/pecentage.dart';
 import 'package:hotel_side/views/dashboard/recent_bookings/recent_bookings.dart';
 import 'package:hotel_side/views/dashboard/rooms_section/rooms_card.dart';
 import 'package:hotel_side/views/dashboard/welcome_card/welcome_card.dart';
-import 'package:provider/provider.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthService>(context);
+    // final authService = Provider.of<AuthService>(context);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(

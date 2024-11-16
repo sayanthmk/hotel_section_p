@@ -10,6 +10,7 @@ class BasicInformation extends StatelessWidget {
   final TextEditingController bookingSinceController = TextEditingController();
   final TextEditingController contactNumberController = TextEditingController();
   final TextEditingController emailAddressController = TextEditingController();
+    final TextEditingController basePriceController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   BasicInformation({super.key});
@@ -62,7 +63,9 @@ class BasicInformation extends StatelessWidget {
                 hotelNameController: hotelNameController,
                 bookingSinceController: bookingSinceController,
                 contactNumberController: contactNumberController,
-                emailAddressController: emailAddressController),
+                emailAddressController: emailAddressController,
+                basePriceController:basePriceController,
+                ),
 
             // Bottom Button
             Container(
@@ -90,7 +93,8 @@ class BasicInformation extends StatelessWidget {
                         'contact_number', contactNumberController.text);
                     hotelProvider.updateHotelData(
                         'email_address', emailAddressController.text);
-
+  hotelProvider.updateHotelData(
+                        'property_setup', basePriceController.text);
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => LocationAddByUser(),
                     ));
@@ -114,34 +118,4 @@ class BasicInformation extends StatelessWidget {
   }
 }
 
-  // Widget _buildSectionHeader({required String title, required IconData icon}) {
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(vertical: 16.0),
-  //     child: Row(
-  //       children: [
-  //         Container(
-  //           padding: const EdgeInsets.all(8),
-  //           decoration: BoxDecoration(
-  //             color: const Color(0xff1E91B6).withOpacity(0.1),
-  //             borderRadius: BorderRadius.circular(8),
-  //           ),
-  //           child: Icon(
-  //             icon,
-  //             color: const Color(0xff1E91B6),
-  //             size: 24,
-  //           ),
-  //         ),
-  //         const SizedBox(width: 12),
-  //         Text(
-  //           title,
-  //           style: const TextStyle(
-  //             fontSize: 20,
-  //             fontWeight: FontWeight.bold,
-  //             color: Color(0xff2E3E5C),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
+ 

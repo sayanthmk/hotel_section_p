@@ -13,7 +13,7 @@ class ProfileCard extends StatelessWidget {
 
     return FutureBuilder<Map<String, dynamic>?>(
       future: hotelProvider
-          .getCurrentHotelDetails(), // Call to fetch current hotel details
+          .fetchHotelDetailsBasedOnStatus(), // Call to fetch current hotel details
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator(); // Loading indicator

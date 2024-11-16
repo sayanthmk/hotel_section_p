@@ -10,7 +10,7 @@ class RoomTile extends StatelessWidget {
   final String? price;
 
   const RoomTile({
-    Key? key,
+    super.key,
     required this.room,
     required this.status,
     required this.isOccupied,
@@ -18,7 +18,7 @@ class RoomTile extends StatelessWidget {
     this.checkOut,
     this.type,
     this.price,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

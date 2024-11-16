@@ -20,12 +20,12 @@ class CustomCardWithCheckbox extends StatelessWidget {
       elevation: 4, // Adds shadow to the card
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15), // Rounded corners
-        side: BorderSide(
-          color: Colors.tealAccent.shade400, // Add a border color for emphasis
-          width: 2.0,
-        ),
+        // side: BorderSide(
+        //   color: Colors.tealAccent.shade400, // Add a border color for emphasis
+        //   width: 2.0,
+        // ),
       ),
-      color: const Color.fromARGB(229, 69, 232, 213), // Card background color
+      color: const Color(0xff1E91B6), // Card background color
       child: Padding(
         padding: const EdgeInsets.all(8.0), // Padding inside the card
         child: Row(
@@ -52,7 +52,7 @@ class CustomCardWithCheckbox extends StatelessWidget {
               value: value, // Bind to the passed value
               onChanged: onChanged, // Call the onChanged function
               activeColor: Colors.white, // White color for the active checkbox
-              checkColor: Colors.tealAccent.shade400, // Custom checkmark color
+              checkColor: const Color(0xff1E91B6), // Custom checkmark color
             ),
           ],
         ),

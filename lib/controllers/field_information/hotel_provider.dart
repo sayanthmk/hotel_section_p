@@ -11,7 +11,7 @@ class HotelProvider extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   final Map<String, dynamic> hotelData = {
-    'userId': '', // Store the user ID who created the hotel
+    'userId': '',
     'hotel_type': '',
     'property_setup': '',
     'hotel_name': '',
@@ -35,7 +35,7 @@ class HotelProvider extends ChangeNotifier {
     'registration': false,
     'document_image': false,
     'images': [],
-    'created_at': null, // Add timestamp for when hotel is created
+    'created_at': null, 
   };
 
   final List<File> _images = [];
@@ -47,7 +47,6 @@ class HotelProvider extends ChangeNotifier {
   bool get isUploading => _isUploading;
   String? hotelId;
 
-  // Update hotel data based on the form inputs
   void updateHotelData(String field, dynamic value) {
     hotelData[field] = value;
     notifyListeners();
@@ -61,7 +60,6 @@ class HotelProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Image handling methods remain the same
   Future<void> pickImages() async {
     final pickedFiles = await ImagePicker().pickMultiImage();
     if (pickedFiles.isNotEmpty) {
@@ -107,7 +105,6 @@ class HotelProvider extends ChangeNotifier {
       notifyListeners();
       return true;
     } catch (e) {
-      print('Error uploading images: $e');
       _isUploading = false;
       notifyListeners();
       return false;
@@ -120,7 +117,6 @@ class HotelProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  // Dropdown items remain the same
   String? _selectedItem;
   final List<String> items = ['Hotel', 'Resort', 'Bunglow', 'Dorm'];
   String? get selectedItem => _selectedItem;
@@ -133,29 +129,37 @@ class HotelProvider extends ChangeNotifier {
   Future<String?> submitHotel() async {
     try {
       // Get the current user's ID
-      // String userId = FirebaseAuth.instance.currentUser!.uid;
-
+      final String? userId = FirebaseAuth.instance.currentUser?.uid;
+      if (userId == null) {
+        throw Exception('No authenticated user found');
+      }
       // Create a new document reference with auto-generated ID
-      DocumentReference docRef = _firestore.collection('hotels').doc();
-      hotelId = docRef.id; // Use the auto-generated ID as hotel ID
+      final DocumentReference docRef =
+          _firestore.collection('hotels').doc(userId);
+      // final String hotelId = docRef.id;
+      final String hotelId = userId;
 
+      // Prepare hotel data
+      Map<String, dynamic> finalHotelData = {
+        ...hotelData, // Assuming hotelData is defined elsewhere
+        'userId': hotelId,
+        'hotelId': hotelId,
+        'created_at': FieldValue.serverTimestamp(),
+      };
+
+      // Add images if available
       if (_imageUrls.isNotEmpty) {
-        hotelData['images'] = _imageUrls;
+        finalHotelData['images'] = _imageUrls;
       }
 
-      // Add user ID and creation timestamp to hotel data
-      // hotelData['userId'] = hotelId;
-      // hotelData['created_at'] = FieldValue.serverTimestamp();
+      await docRef.set(finalHotelData);
 
-      // Save to Firestore using the auto-generated ID
-      await docRef.set(hotelData);
-
-      // Save hotel ID to SharedPreferences
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      await prefs.setString('hotelId', hotelId!);
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('hotelId', hotelId);
 
       log('Hotel submitted successfully with ID: $hotelId');
-      clearImages();
+      clearImages(); // Assuming this function is defined elsewhere
+
       return hotelId;
     } catch (e) {
       debugPrint('Error submitting hotel: $e');
@@ -170,6 +174,32 @@ class HotelProvider extends ChangeNotifier {
       // Query hotels collection for documents where userId matches
       QuerySnapshot hotelQuery = await _firestore
           .collection('hotels')
+          .where('userId', isEqualTo: userId)
+          // .where('status', isEqualTo: 'approved') 
+          .limit(1)
+          .get();
+
+      if (hotelQuery.docs.isNotEmpty) {
+        hotelId = hotelQuery.docs.first.id;
+        log('Hotel already registered with ID: $hotelId');
+        return hotelId;
+      } else {
+        log('Hotel not registered');
+        return null;
+      }
+    } catch (e) {
+      debugPrint('Error checking hotel registration: $e');
+      return null;
+    }
+  }
+
+  Future<String?> checkApprovedHotelRegistration() async {
+    try {
+      String userId = FirebaseAuth.instance.currentUser!.uid;
+
+      // Query hotels collection for documents where userId matches
+      QuerySnapshot hotelQuery = await _firestore
+          .collection('approved_hotels')
           .where('userId', isEqualTo: userId)
           .limit(1)
           .get();
@@ -188,15 +218,74 @@ class HotelProvider extends ChangeNotifier {
     }
   }
 
-  String? getUserId() {
-    User? user = FirebaseAuth.instance.currentUser;
-    return user?.uid;
-  }
+  // String? getUserId() {
+  //   User? user = FirebaseAuth.instance.currentUser;
+  //   return user?.uid;
+  // }
+
+  // Future<Map<String, dynamic>?> getCurrentHotelDetails() async {
+  //   try {
+  //     if (hotelId == null) {
+  //       // Try to get hotel ID from registration check
+  //       hotelId = await checkHotelRegistration();
+  //       if (hotelId == null) {
+  //         log('No hotel ID found');
+  //         return null;
+  //       }
+  //     }
+
+  //     // Get hotel document using hotel ID
+  //     DocumentSnapshot hotelDoc =
+  //         await _firestore.collection('hotels').doc(hotelId).get();
+
+  //     if (hotelDoc.exists) {
+  //       Map<String, dynamic> hotelDetails =
+  //           hotelDoc.data() as Map<String, dynamic>;
+  //       log('Fetched current hotel details for hotelId: $hotelId');
+  //       return hotelDetails;
+  //     } else {
+  //       log('No hotel found for hotelId: $hotelId');
+  //       return null;
+  //     }
+  //   } catch (e) {
+  //     debugPrint('Error fetching current hotel details: $e');
+  //     return null;
+  //   }
+  // }
+
+  // Future<Map<String, dynamic>?> getApprovedHotelDetails() async {
+  //   try {
+  //     if (hotelId == null) {
+  //       // Try to get hotel ID from registration check
+  //       hotelId = await checkHotelRegistration();
+  //       if (hotelId == null) {
+  //         log('No hotel ID found');
+  //         return null;
+  //       }
+  //     }
+
+  //     // Get hotel document using hotel ID
+  //     DocumentSnapshot hotelDoc =
+  //         await _firestore.collection('hotels').doc(hotelId).get();
+
+  //     if (hotelDoc.exists) {
+  //       Map<String, dynamic> hotelDetails =
+  //           hotelDoc.data() as Map<String, dynamic>;
+  //       log('Fetched current hotel details for hotelId: $hotelId');
+  //       return hotelDetails;
+  //     } else {
+  //       log('No hotel found for hotelId: $hotelId');
+  //       return null;
+  //     }
+  //   } catch (e) {
+  //     debugPrint('Error fetching current hotel details: $e');
+  //     return null;
+  //   }
+  // }
 
   Future<Map<String, dynamic>?> getCurrentHotelDetails() async {
     try {
       if (hotelId == null) {
-        // Try to get hotel ID from registration check
         hotelId = await checkHotelRegistration();
         if (hotelId == null) {
           log('No hotel ID found');
@@ -204,7 +293,6 @@ class HotelProvider extends ChangeNotifier {
         }
       }
 
-      // Get hotel document using hotel ID
       DocumentSnapshot hotelDoc =
           await _firestore.collection('hotels').doc(hotelId).get();
 
@@ -219,6 +307,68 @@ class HotelProvider extends ChangeNotifier {
       }
     } catch (e) {
       debugPrint('Error fetching current hotel details: $e');
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>?> getApprovedHotelDetails() async {
+    try {
+      if (hotelId == null) {
+        hotelId = await checkHotelRegistration();
+        if (hotelId == null) {
+          log('No hotel ID found');
+          return null;
+        }
+      }
+
+      DocumentSnapshot hotelDoc =
+          await _firestore.collection('hotels').doc(hotelId).get();
+
+      if (hotelDoc.exists) {
+        Map<String, dynamic> hotelDetails =
+            hotelDoc.data() as Map<String, dynamic>;
+        log('Fetched approved hotel details for hotelId: $hotelId');
+        return hotelDetails;
+      } else {
+        log('No hotel found for hotelId: $hotelId');
+        return null;
+      }
+    } catch (e) {
+      debugPrint('Error fetching approved hotel details: $e');
+      return null;
+    }
+  }
+
+  Future<Map<String, dynamic>?> fetchHotelDetailsBasedOnStatus() async {
+    try {
+      if (hotelId == null) {
+        hotelId = await checkApprovedHotelRegistration();
+        if (hotelId == null) {
+          log('No hotel ID found');
+          return null;
+        }
+      }
+
+      // Check status field in the approved_hotels collection
+      DocumentSnapshot statusDoc =
+          await _firestore.collection('approved_hotels').doc(hotelId).get();
+
+      if (statusDoc.exists) {
+        Map<String, dynamic> statusData =
+            statusDoc.data() as Map<String, dynamic>;
+        String? status = statusData['status'];
+
+        if (status == 'approved') {
+          return await getApprovedHotelDetails();
+        } else {
+          return await getCurrentHotelDetails();
+        }
+      } else {
+        log('No status document found for hotelId: $hotelId');
+        return await getCurrentHotelDetails();
+      }
+    } catch (e) {
+      debugPrint('Error checking hotel status: $e');
       return null;
     }
   }
@@ -267,3 +417,35 @@ class HotelProvider extends ChangeNotifier {
     }
   }
 }
+  // Future<String?> submitHotel() async {
+  //   try {
+  //     // Get the current user's ID
+  //     // String userId = FirebaseAuth.instance.currentUser!.uid;
+
+  //     // Create a new document reference with auto-generated ID
+  //     DocumentReference docRef = _firestore.collection('hotels').doc();
+  //     hotelId = docRef.id; // Use the auto-generated ID as hotel ID
+
+  //     if (_imageUrls.isNotEmpty) {
+  //       hotelData['images'] = _imageUrls;
+  //     }
+
+  //     // Add user ID and creation timestamp to hotel data
+  //     // hotelData['userId'] = hotelId;
+  //     // hotelData['created_at'] = FieldValue.serverTimestamp();
+
+  //     // Save to Firestore using the auto-generated ID
+  //     await docRef.set(hotelData);
+
+  //     // Save hotel ID to SharedPreferences
+  //     SharedPreferences prefs = await SharedPreferences.getInstance();
+  //     await prefs.setString('hotelId', hotelId!);
+
+  //     log('Hotel submitted successfully with ID: $hotelId');
+  //     clearImages();
+  //     return hotelId;
+  //   } catch (e) {
+  //     debugPrint('Error submitting hotel: $e');
+  //     return null;
+  //   }
+  // }

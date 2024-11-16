@@ -5,9 +5,9 @@ import 'package:hotel_side/controllers/field_information/roomprovider.dart';
 import 'package:hotel_side/controllers/widgets_controller/widgets_controlle.dart';
 import 'package:hotel_side/views/add_rooms/images_upload.dart';
 import 'package:hotel_side/views/add_rooms/room_amentites/room_amentities.dart';
-import 'package:hotel_side/views/add_rooms/room_facilities.dart';
+import 'package:hotel_side/views/add_rooms/room_facillity/room_facilities.dart';
 import 'package:hotel_side/views/add_rooms/room_final_review.dart';
-import 'package:hotel_side/views/add_rooms/room_type.dart';
+import 'package:hotel_side/views/add_rooms/room_type/room_type.dart';
 import 'package:hotel_side/views/bottom_nav/bottom_nav.dart';
 import 'package:hotel_side/views/dashboard/hotel_dash.dart';
 import 'package:hotel_side/views/registration_page/basic_info/basic_information.dart';
@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
           // fontFamily: 'Montserrat',
           primarySwatch: Colors.blue,
         ),
-        home: AuthWrapper(),
+        home: const AuthWrapper(),
 
         // home: RoomsSubmissionPage(),
       ),

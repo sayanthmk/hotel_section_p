@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/widgets_controller/widgets_controlle.dart';
+import 'package:hotel_side/controllers/widgets_controller/widgets_controller.dart';
 import 'package:hotel_side/views/dashboard/hotel_dash.dart';
 import 'package:hotel_side/views/home_page/home.dart';
 import 'package:hotel_side/views/profile/profile_page.dart';
@@ -20,8 +20,7 @@ class BottomNavScreen extends StatelessWidget {
     final provider = Provider.of<WidgetsController>(context);
 
     return Scaffold(
-   
-      body: pages[provider.currentIndex], 
+      body: pages[provider.currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.black,
         unselectedItemColor: Colors.grey,

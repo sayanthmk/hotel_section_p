@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:hotel_side/views/auth/phone_verification.dart';
 import 'package:provider/provider.dart';
@@ -50,11 +52,9 @@ class PhoneInputPage extends StatelessWidget {
                       await authService.signInWithPhone(
                         _phoneNumber,
                         (phoneAuthCredential) async {
-                          // Auto-retrieval of the code on some devices
                           await authService
                               .signInWithPhoneCredential(phoneAuthCredential);
-                          Navigator.of(context)
-                              .pop(); // Return to previous page after successful sign-in
+                          Navigator.of(context).pop();
                         },
                         (error) {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -71,7 +71,7 @@ class PhoneInputPage extends StatelessWidget {
                           );
                         },
                         (verificationId) {
-                          print('Auto-retrieval timeout');
+                          // print('Auto-retrieval timeout');
                         },
                       );
                     } catch (e) {

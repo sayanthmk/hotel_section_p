@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
+import 'package:hotel_side/controllers/hotel_provider/hotel_provider.dart';
 import 'package:hotel_side/views/registration_page/final_review_page/widgets/build_section_tile.dart';
 import 'package:hotel_side/views/registration_page/final_review_page/widgets/faciltity_chip.dart';
 import 'package:hotel_side/views/registration_page/final_review_page/widgets/image_tile.dart';
@@ -30,7 +30,7 @@ class DetailFinalReviewCard extends StatelessWidget {
               value: hotelData['hotel_type'],
             ),
             InfoCard(
-              title: 'Property Setup',
+              title: 'Base Price',
               value: hotelData['property_setup'],
             ),
             InfoCard(

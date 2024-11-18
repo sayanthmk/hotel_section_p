@@ -1,5 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
+import 'package:hotel_side/controllers/hotel_provider/hotel_provider.dart';
 import 'package:hotel_side/views/registration_page/final_review_page/final_review.dart';
 import 'package:hotel_side/views/registration_page/images_page/image_floating.dart';
 import 'package:hotel_side/widgets/home_page_widgets/button.dart';
@@ -32,7 +33,6 @@ class ImagesUploadingScreen extends StatelessWidget {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // Image Grid
               Expanded(
                 child: provider.images.isEmpty
                     ? Center(
@@ -86,7 +86,6 @@ class ImagesUploadingScreen extends StatelessWidget {
                                       provider.images[index],
                                       fit: BoxFit.cover,
                                     ),
-                                    // Gradient overlay
                                     Positioned(
                                       top: 0,
                                       right: 0,
@@ -133,8 +132,6 @@ class ImagesUploadingScreen extends StatelessWidget {
                         ),
                       ),
               ),
-
-              // Next Button
               if (provider.images.isNotEmpty)
                 Padding(
                   padding: const EdgeInsets.all(16.0),
@@ -156,14 +153,12 @@ class ImagesUploadingScreen extends StatelessWidget {
                             : () async {
                                 bool success = await provider.uploadImages();
                                 if (success) {
-                                  // ignore: use_build_context_synchronously
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => const FinalReview(),
                                     ),
                                   );
                                 } else {
-                                  // ignore: use_build_context_synchronously
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                       content: Text(
@@ -194,48 +189,7 @@ class ImagesUploadingScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: ImageFloatingButton(),
+      floatingActionButton: const ImageFloatingButton(),
     );
   }
 }
-
-
-       // Upload Instructions
-              // Padding(
-              //   padding: const EdgeInsets.all(16.0),
-              //   child: Container(
-              //     padding: const EdgeInsets.all(16),
-              //     decoration: BoxDecoration(
-              //       color: Colors.white,
-              //       borderRadius: BorderRadius.circular(12),
-              //       boxShadow: [
-              //         BoxShadow(
-              //           color: Colors.black.withOpacity(0.05),
-              //           blurRadius: 10,
-              //           offset: const Offset(0, 4),
-              //         ),
-              //       ],
-              //     ),
-              //     child: Column(
-              //       crossAxisAlignment: CrossAxisAlignment.start,
-              //       children: [
-              //         const Text(
-              //           'Hotel Photos',
-              //           style: TextStyle(
-              //             fontSize: 18,
-              //             fontWeight: FontWeight.bold,
-              //             color: Color(0xff1E91B6),
-              //           ),
-              //         ),
-              //         const SizedBox(height: 8),
-              //         Text(
-              //           'Add high-quality photos of your property to attract more guests',
-              //           style: TextStyle(
-              //             color: Colors.grey[600],
-              //             fontSize: 14,
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),

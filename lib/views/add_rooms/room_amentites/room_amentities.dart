@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/roomprovider.dart';
+import 'package:hotel_side/controllers/room_controller/roomprovider.dart';
 import 'package:hotel_side/views/add_rooms/images_upload.dart';
 import 'package:hotel_side/views/add_rooms/room_amentites/widgets/amentity_card.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +9,6 @@ class RoomAmenities extends StatelessWidget {
 
   final _formKey = GlobalKey<FormState>();
 
-  // Define custom colors
   static const primaryColor = Color(0xff1E91B6);
   static final secondaryColor = primaryColor.withOpacity(0.1);
   static const textDarkColor = Color(0xFF2C3E50);
@@ -152,7 +151,7 @@ class RoomAmenities extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.of(context).push(
+                        Navigator.of(context).pushReplacement(
                           MaterialPageRoute(
                             builder: (_) => const RoomImageUploadPage(),
                           ),
@@ -192,6 +191,3 @@ class RoomAmenities extends StatelessWidget {
     );
   }
 }
-
-
-  

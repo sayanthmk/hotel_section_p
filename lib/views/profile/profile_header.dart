@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/auth_service/auth_service.dart';
-import 'package:provider/provider.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({
@@ -9,7 +7,6 @@ class ProfileHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authService = Provider.of<AuthService>(context);
     return Stack(
       clipBehavior: Clip.none,
       alignment: Alignment.center,
@@ -29,13 +26,7 @@ class ProfileHeader extends StatelessWidget {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // IconButton(
-                    //   icon:
-                    //       const Icon(Icons.arrow_back_ios, color: Colors.white),
-                    //   onPressed: () => Navigator.of(context).pop(),
-                    // ),
                     IconButton(
                       icon: const Icon(Icons.settings, color: Colors.white),
                       onPressed: () {},

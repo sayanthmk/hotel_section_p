@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
+import 'package:hotel_side/controllers/hotel_provider/hotel_provider.dart';
 import 'package:hotel_side/views/registration_page/basic_info/basic_information.dart';
 import 'package:hotel_side/views/registration_page/hotel_type/chechbox_type.dart';
 import 'package:hotel_side/widgets/home_page_widgets/button.dart';
@@ -202,48 +202,3 @@ class HotelTypeSelection extends StatelessWidget {
     );
   }
 }
-//   Widget _buildCheckboxTile({
-//     required BuildContext context,
-//     required String title,
-//     required String subtitle,
-//     required bool value,
-//     required Function(bool?) onChanged,
-//   }) {
-//     return Row(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         CustomCheckbox(
-//           value: value,
-//           onChanged: onChanged,
-//           activeColor: const Color(0xff1E91B6),
-//           checkColor: Colors.white,
-//           size: 24.0,
-//         ),
-//         const SizedBox(width: 12),
-//         Expanded(
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.start,
-//             children: [
-//               Text(
-//                 title,
-//                 style: const TextStyle(
-//                   fontSize: 16,
-//                   fontWeight: FontWeight.w500,
-//                   color: Colors.black87,
-//                 ),
-//               ),
-//               const SizedBox(height: 4),
-//               Text(
-//                 subtitle,
-//                 style: const TextStyle(
-//                   fontSize: 14,
-//                   color: Colors.black54,
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }

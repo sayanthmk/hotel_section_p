@@ -1,8 +1,8 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
+import 'package:hotel_side/controllers/hotel_provider/hotel_provider.dart';
 import 'package:hotel_side/views/bottom_nav/bottom_nav.dart';
 import 'package:hotel_side/views/registration_page/final_review_page/widgets/detail_card.dart';
+import 'package:hotel_side/widgets/home_page_widgets/button.dart';
 import 'package:provider/provider.dart';
 
 class FinalReview extends StatelessWidget {
@@ -11,13 +11,28 @@ class FinalReview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hotelProvider = Provider.of<HotelProvider>(context);
-    final hotelData = hotelProvider.hotelData;
 
     return Scaffold(
       backgroundColor: const Color(0xffF5F9FF),
       appBar: AppBar(
-        elevation: 0,
-        title: const Text('Final Review'),
+        backgroundColor: Colors.white,
+        elevation: 1,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Color(0xff1E91B6)),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Column(
+          children: [
+            Text(
+              'Final Review',
+              style: TextStyle(
+                color: Colors.black87,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
@@ -30,13 +45,9 @@ class FinalReview extends StatelessWidget {
               const SizedBox(height: 24),
               SizedBox(
                 width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    log('Hotel Type: ${hotelData['hotel_type']}');
-                    log('Property Setup: ${hotelData['property_setup']}');
-                    log('Contact Number: ${hotelData['info']?['contact_number']}');
-                    log('State: ${hotelData['location']?['state']}');
-
+                child: HotelButton(
+                  text: "Submit Hotel Details",
+                  onTap: () {
                     hotelProvider.submitHotel().then((_) {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => BottomNavScreen(),
@@ -50,19 +61,14 @@ class FinalReview extends StatelessWidget {
                       );
                     });
                   },
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'Submit Hotel Details',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                  color: const Color(0xff1E91B6),
+                  textColor: Colors.white,
+                  borderRadius: 12.0,
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.w600,
+                  height: 56,
+                  width: double.infinity,
                 ),
               ),
             ],
@@ -72,6 +78,39 @@ class FinalReview extends StatelessWidget {
     );
   }
 }
+  // child: ElevatedButton(
+                //   onPressed: () {
+                //     log('Hotel Type: ${hotelData['hotel_type']}');
+                //     log('Property Setup: ${hotelData['property_setup']}');
+                //     log('Contact Number: ${hotelData['info']?['contact_number']}');
+                //     log('State: ${hotelData['location']?['state']}');
 
+                //     hotelProvider.submitHotel().then((_) {
+                //       Navigator.of(context).push(MaterialPageRoute(
+                //         builder: (context) => BottomNavScreen(),
+                //       ));
+                //     }).catchError((error) {
+                //       ScaffoldMessenger.of(context).showSnackBar(
+                //         SnackBar(
+                //           content: Text('Error: $error'),
+                //           backgroundColor: Colors.red,
+                //         ),
+                //       );
+                //     });
+                //   },
+                //   style: ElevatedButton.styleFrom(
+                //     padding: const EdgeInsets.symmetric(vertical: 16),
+                //     shape: RoundedRectangleBorder(
+                //       borderRadius: BorderRadius.circular(12),
+                //     ),
+                //   ),
+                //   child: const Text(
+                //     'Submit Hotel Details',
+                //     style: TextStyle(
+                //       fontSize: 16,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //   ),
+                // ),
 
  

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
+import 'package:hotel_side/controllers/hotel_provider/hotel_provider.dart';
 import 'package:hotel_side/widgets/home_page_widgets/custom_checkbox.dart';
 import 'package:provider/provider.dart';
 
@@ -62,7 +62,6 @@ class PolicyTile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Row(
         children: [
-          // PolicyIcon(icon: icon),
           Container(
             padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
@@ -77,10 +76,6 @@ class PolicyTile extends StatelessWidget {
           ),
           const SizedBox(width: 16),
           Expanded(
-            // child: PolicyInfo(
-            //   title: title,
-            //   subtitle: subtitle,
-            // ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -113,79 +108,6 @@ class PolicyTile extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-// class PolicyIcon extends StatelessWidget {
-//   final IconData icon;
-
-//   const PolicyIcon({
-//     super.key,
-//     required this.icon,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       padding: const EdgeInsets.all(12),
-//       decoration: BoxDecoration(
-//         color: const Color(0xff1E91B6).withOpacity(0.1),
-//         borderRadius: BorderRadius.circular(12),
-//       ),
-//       child: Icon(
-//         icon,
-//         color: const Color(0xff1E91B6),
-//         size: 24,
-//       ),
-//     );
-//   }
-// }
-
-// class PolicyInfo extends StatelessWidget {
-//   final String title;
-//   final String subtitle;
-
-//   const PolicyInfo({
-//     super.key,
-//     required this.title,
-//     required this.subtitle,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Column(
-//       crossAxisAlignment: CrossAxisAlignment.start,
-//       children: [
-//         Text(
-//           title,
-//           style: const TextStyle(
-//             fontSize: 16,
-//             fontWeight: FontWeight.w600,
-//           ),
-//         ),
-//         const SizedBox(height: 4),
-//         Text(
-//           subtitle,
-//           style: TextStyle(
-//             fontSize: 14,
-//             color: Colors.grey[600],
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-class PolicyDivider extends StatelessWidget {
-  const PolicyDivider({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Divider(
-      height: 1,
-      thickness: 1,
-      color: Color(0xFFEEEEEE),
     );
   }
 }

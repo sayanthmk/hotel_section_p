@@ -13,7 +13,6 @@ class EditProfileSection extends StatelessWidget {
         children: [
           Expanded(
             child: Container(
-              // height: 40,
               width: 50,
               padding: const EdgeInsets.symmetric(vertical: 12),
               decoration: BoxDecoration(
@@ -24,7 +23,7 @@ class EditProfileSection extends StatelessWidget {
                     color: Colors.indigo.withOpacity(0.5),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset: Offset(0, 3), // changes position of shadow
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -35,7 +34,7 @@ class EditProfileSection extends StatelessWidget {
                   color: Colors.white,
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
-                  fontSize: 16, // Adjust size as needed
+                  fontSize: 16,
                 ),
               ),
             ),
@@ -44,12 +43,11 @@ class EditProfileSection extends StatelessWidget {
           Expanded(
             child: Container(
               width: 50,
-              // height: 50,
               padding: const EdgeInsets.symmetric(vertical: 10),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.indigo[600]!,
-                  width: 2, // You can adjust the border thickness here
+                  width: 2,
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -59,8 +57,8 @@ class EditProfileSection extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Montserrat',
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF3949AB), // Equivalent to Colors.indigo[600]
-                  fontSize: 16, // Adjust size as needed
+                  color: Color(0xFF3949AB),
+                  fontSize: 16,
                 ),
               ),
             ),

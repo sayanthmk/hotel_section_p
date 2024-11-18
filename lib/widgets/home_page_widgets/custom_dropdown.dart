@@ -21,7 +21,7 @@ class CustomDropdown extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey, width: 1.0),
         borderRadius: BorderRadius.circular(8.0),
-        color: Colors.white, // Background color
+        color: Colors.white,
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
@@ -29,7 +29,7 @@ class CustomDropdown extends StatelessWidget {
           value: value,
           icon: const Icon(Icons.arrow_drop_down),
           iconSize: 24,
-          isExpanded: true, // Makes the dropdown take full width
+          isExpanded: true,
           style: const TextStyle(color: Colors.black, fontSize: 16),
           items: items.map((String item) {
             return DropdownMenuItem<String>(

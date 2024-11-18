@@ -21,7 +21,6 @@ class CustomRadioButton extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         color: Colors.grey[50],
-        // Background color
         borderRadius: BorderRadius.circular(12.0),
         border: Border.all(
           color: Colors.grey.shade300,
@@ -32,21 +31,20 @@ class CustomRadioButton extends StatelessWidget {
             color: Colors.grey.withOpacity(0.3),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: const Offset(0, 3), // shadow direction
+            offset: const Offset(0, 3),
           ),
         ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          // Yes option with a decorative label
           Row(
             children: [
               Radio<bool>(
                 value: true,
                 groupValue: groupValue,
                 onChanged: onChanged,
-                activeColor: Colors.green, // Custom color for selected radio
+                activeColor: Colors.green,
               ),
               const SizedBox(width: 5),
               Text(
@@ -59,15 +57,13 @@ class CustomRadioButton extends StatelessWidget {
               ),
             ],
           ),
-
-          // No option with a decorative label
           Row(
             children: [
               Radio<bool>(
                 value: false,
                 groupValue: groupValue,
                 onChanged: onChanged,
-                activeColor: Colors.red, // Custom color for selected radio
+                activeColor: Colors.red,
               ),
               const SizedBox(width: 5),
               Text(

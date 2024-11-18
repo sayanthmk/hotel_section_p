@@ -1,5 +1,7 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
+import 'package:hotel_side/controllers/hotel_provider/hotel_provider.dart';
 import 'package:hotel_side/views/auth/route_page.dart';
 import 'package:hotel_side/views/profile/profile_items.dart';
 import 'package:provider/provider.dart';
@@ -11,8 +13,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
-    final hotelProvider = Provider.of<HotelProvider>(context,
-        listen: false); // Access the HotelProvider
+    final hotelProvider = Provider.of<HotelProvider>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Home')),
@@ -23,20 +24,19 @@ class HomePage extends StatelessWidget {
             Text('Welcome, ${authService.currentUser?.email ?? 'User'}!'),
             const SizedBox(height: 16),
             FutureBuilder<String?>(
-              future: hotelProvider.hotelPermission(), // Check hotel permission
+              future: hotelProvider.hotelPermission(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator(); // Loading indicator
+                  return const CircularProgressIndicator();
                 } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}'); // Show error if any
+                  return Text('Error: ${snapshot.error}');
                 } else if (snapshot.data != null) {
-                  // Hotel is permitted
                   return Container(
                     width: 200,
                     height: 50,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.green, // Green color for permitted
+                      color: Colors.green,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Text(
@@ -45,13 +45,12 @@ class HomePage extends StatelessWidget {
                     ),
                   );
                 } else {
-                  // Hotel is not permitted
                   return Container(
                     width: 200,
                     height: 50,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: Colors.red, // Red color for not permitted
+                      color: Colors.red,
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: const Text(

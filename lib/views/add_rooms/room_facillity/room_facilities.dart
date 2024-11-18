@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/roomprovider.dart';
+import 'package:hotel_side/controllers/room_controller/roomprovider.dart';
 import 'package:hotel_side/views/add_rooms/room_amentites/room_amentities.dart';
 import 'package:hotel_side/views/add_rooms/room_facillity/room_facility_card.dart';
 import 'package:provider/provider.dart';
@@ -111,7 +111,7 @@ class RoomFacility extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (_) => RoomAmenities(),
                         ),

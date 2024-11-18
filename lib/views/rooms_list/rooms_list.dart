@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/roomprovider.dart';
-import 'package:hotel_side/views/add_rooms/room_type/room_type.dart';
+import 'package:hotel_side/controllers/room_controller/roomprovider.dart';
+import 'package:hotel_side/views/add_rooms/room_type/room_type_sel.dart';
 import 'package:hotel_side/views/rooms_list/widgets/room_appbar.dart';
 import 'package:hotel_side/views/rooms_list/widgets/room_card.dart';
 import 'package:hotel_side/views/rooms_list/widgets/states.dart';
@@ -11,7 +11,6 @@ class RoomListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Obtain the provider outside FutureBuilder
     final roomProvider = Provider.of<RoomProvider>(context, listen: false);
 
     return Scaffold(
@@ -37,7 +36,11 @@ class RoomListPage extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 itemCount: rooms.length,
                 itemBuilder: (context, index) {
-                  return RoomCard(room: rooms[index]);
+                  // WidgetsBinding.instance.addPostFrameCallback((_) {
+                  //   roomProvider.setSelectedRoom(index);
+                  // });
+                  provider.setSelectedRoom(index);
+                  return const RoomCard();
                 },
               );
             },
@@ -53,7 +56,10 @@ class RoomListPage extends StatelessWidget {
           );
         },
         backgroundColor: const Color(0xff1E91B6),
-        child: const Icon(Icons.add),
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
     );
   }

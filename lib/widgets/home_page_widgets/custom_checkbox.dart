@@ -8,13 +8,13 @@ class CustomCheckbox extends StatelessWidget {
   final double size;
 
   const CustomCheckbox({
-    Key? key,
+    super.key,
     required this.value,
     required this.onChanged,
     this.activeColor,
     this.checkColor,
     this.size = 15.0,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

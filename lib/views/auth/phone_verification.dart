@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -48,8 +50,7 @@ class CodeVerificationPage extends StatelessWidget {
                         smsCode: _codeController.text,
                       );
                       await authService.signInWithPhoneCredential(credential);
-                      Navigator.of(context).popUntil((route) => route
-                          .isFirst); // Return to the first page after successful sign-in
+                      Navigator.of(context).popUntil((route) => route.isFirst);
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

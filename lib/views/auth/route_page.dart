@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_side/constants/colors/colors.dart';
-import 'package:hotel_side/views/auth/login.dart';
+import 'package:hotel_side/views/auth/login_page/login.dart';
 import 'package:hotel_side/views/auth/register.dart';
 import 'package:hotel_side/widgets/auth_widgets/gradiant_button.dart';
 

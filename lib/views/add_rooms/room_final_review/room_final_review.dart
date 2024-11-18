@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/roomprovider.dart';
+import 'package:hotel_side/controllers/room_controller/roomprovider.dart';
 import 'package:hotel_side/views/add_rooms/room_final_review/room_submission_image.dart';
 import 'package:hotel_side/views/registration_page/final_review_page/widgets/faciltity_chip.dart';
 import 'package:hotel_side/views/registration_page/final_review_page/widgets/info_card.dart';
@@ -101,10 +101,9 @@ class RoomsSubmissionPage extends StatelessWidget {
               Center(
                 child: HotelButton(
                   text: "Submit",
-                  // onTap: () => _handleSubmit(context, hotelProvider),
                   onTap: () {
                     roomProvider.submitRoom().then((_) {
-                      Navigator.of(context).push(
+                      Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
                           builder: (context) => const RoomListPage(),
                         ),
@@ -115,7 +114,6 @@ class RoomsSubmissionPage extends StatelessWidget {
                       );
                     });
                   },
-
                   color: const Color(0xff1E91B6),
                   textColor: Colors.white,
                   borderRadius: 12.0,
@@ -125,22 +123,6 @@ class RoomsSubmissionPage extends StatelessWidget {
                   height: 50,
                   width: 100,
                 ),
-                // child: ElevatedButton(
-                //   onPressed: () {
-                //     roomProvider.submitRoom().then((_) {
-                //       Navigator.of(context).push(
-                //         MaterialPageRoute(
-                //           builder: (context) => const RoomListPage(),
-                //         ),
-                //       );
-                //     }).catchError((error) {
-                //       ScaffoldMessenger.of(context).showSnackBar(
-                //         SnackBar(content: Text('Error: $error')),
-                //       );
-                //     });
-                //   },
-                //   child: const Text('Submit'),
-                // ),
               ),
             ],
           ),

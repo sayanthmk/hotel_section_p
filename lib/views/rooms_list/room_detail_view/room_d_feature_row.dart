@@ -35,7 +35,6 @@ class FeatureRow extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Feature Icon
           Container(
             padding: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
@@ -53,8 +52,6 @@ class FeatureRow extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 16.0),
-
-          // Feature Text
           Expanded(
             child: Text(
               feature,
@@ -65,8 +62,6 @@ class FeatureRow extends StatelessWidget {
               ),
             ),
           ),
-
-          // Availability Status
           Container(
             padding:
                 const EdgeInsets.symmetric(horizontal: 12.0, vertical: 6.0),

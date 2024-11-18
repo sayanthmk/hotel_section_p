@@ -26,7 +26,7 @@ class RoomRadioButton extends StatelessWidget {
         children: [
           Text(
             heading,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
           const SizedBox(
             height: 5,
@@ -34,15 +34,13 @@ class RoomRadioButton extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              // Yes option with a decorative label
               Row(
                 children: [
                   Radio<bool>(
                     value: true,
                     groupValue: groupValue,
                     onChanged: onChanged,
-                    activeColor:
-                        Colors.green, // Custom color for selected radio
+                    activeColor: Colors.green,
                   ),
                   const SizedBox(width: 5),
                   Text(
@@ -55,15 +53,13 @@ class RoomRadioButton extends StatelessWidget {
                   ),
                 ],
               ),
-
-              // No option with a decorative label
               Row(
                 children: [
                   Radio<bool>(
                     value: false,
                     groupValue: groupValue,
                     onChanged: onChanged,
-                    activeColor: Colors.red, // Custom color for selected radio
+                    activeColor: Colors.red,
                   ),
                   const SizedBox(width: 5),
                   Text(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
+import 'package:hotel_side/controllers/hotel_provider/hotel_provider.dart';
 import 'package:hotel_side/views/registration_page/finance_information/widgets/document_upload.dart';
 import 'package:hotel_side/views/registration_page/finance_information/widgets/finace_input_field.dart';
 import 'package:hotel_side/views/registration_page/finance_information/widgets/finance_card.dart';
@@ -50,7 +50,6 @@ class FinanceInformation extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // const ProgressBar(),
                   const SizedBox(height: 32),
                   const FinanceSectionTitle(
                     title: 'Finance & Legal Information',
@@ -101,7 +100,6 @@ class FinanceInformation extends StatelessWidget {
                   Center(
                     child: HotelButton(
                       text: "Continue to Images",
-                      // onTap: () => _handleSubmit(context, hotelProvider),
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
                           hotelProvider.updateHotelData(
@@ -127,7 +125,6 @@ class FinanceInformation extends StatelessWidget {
                           );
                         }
                       },
-
                       color: const Color(0xff1E91B6),
                       textColor: Colors.white,
                       borderRadius: 12.0,
@@ -148,51 +145,3 @@ class FinanceInformation extends StatelessWidget {
     );
   }
 }
-// Section Title Widget
-
-
-// Card Container Widget
-
-
-// Radio Section Widget
-
-
-// Financial Input Fields Widget
-
-
-// Progress Bar Widget
-// class ProgressBar extends StatelessWidget {
-//   const ProgressBar({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const LinearProgressIndicator(
-//       value: 0.8, // 80% progress
-//       backgroundColor: Color(0xFFE0E0E0),
-//       valueColor: AlwaysStoppedAnimation<Color>(Color(0xff1E91B6)),
-//     );
-//   }
-// }
-
-// Main Screen Widget
-  //                       void _handleSubmit(BuildContext context, HotelProvider hotelProvider) {
-  //   if (_formKey.currentState!.validate()) {
-  //     hotelProvider.updateHotelData('pan_number', panNumberController.text);
-  //     hotelProvider.updateHotelData(
-  //         'property_number', propertyNumberController.text);
-  //     hotelProvider.updateHotelData('gst_number', gstNumberController.text);
-
-  //     Navigator.of(context).push(
-  //       MaterialPageRoute(
-  //         builder: (context) => const ImagesUploadingScreen(),
-  //       ),
-  //     );
-  //   } else {
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       const SnackBar(
-  //         content: Text('Please fill all required fields correctly'),
-  //         backgroundColor: Colors.red,
-  //       ),
-  //     );
-  //   }
-  // }

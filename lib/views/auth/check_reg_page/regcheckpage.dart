@@ -1,9 +1,9 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/auth_service/auth_service.dart';
-import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
+import 'package:hotel_side/controllers/hotel_provider/hotel_provider.dart';
 import 'package:hotel_side/views/bottom_nav/bottom_nav.dart';
 import 'package:hotel_side/views/registration_page/entry_page.dart';
-import 'package:hotel_side/unwanted/success_screen.dart';
 import 'package:provider/provider.dart';
 
 class HotelCheckPage extends StatelessWidget {
@@ -12,18 +12,14 @@ class HotelCheckPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final hotelProvider = Provider.of<HotelProvider>(context);
-    final authService = Provider.of<AuthService>(context);
 
-    // Check the hotel registration status using FutureBuilder
-    Future<String?> _checkHotelRegistration() async {
+    Future<String?> checkHotelRegistration() async {
       return await hotelProvider.checkHotelRegistration();
     }
 
-    // Automatically navigate based on the hotel registration status
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      String? hotelId = await _checkHotelRegistration();
+      String? hotelId = await checkHotelRegistration();
       if (hotelId != null) {
-        // Navigate to SuccessScreen if the hotel is registered
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -31,7 +27,6 @@ class HotelCheckPage extends StatelessWidget {
           ),
         );
       } else {
-        // Navigate to EntryRegistrationPage if the hotel is not registered
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
@@ -41,20 +36,10 @@ class HotelCheckPage extends StatelessWidget {
       }
     });
 
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text('Check Hotel Registration'),
-      // ),
-      body: const Center(
-        child: CircularProgressIndicator(), // Show loading indicator
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
       ),
-      // bottomNavigationBar: ElevatedButton(
-      //   child: const Text('Sign Out'),
-      //   onPressed: () async {
-      //     await authService.signOut();
-      //     Navigator.of(context).pop();
-      //   },
-      // ),
     );
   }
 }

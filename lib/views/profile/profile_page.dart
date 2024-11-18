@@ -16,10 +16,7 @@ class UserProfileScreen extends StatelessWidget {
           child: Column(
             children: [
               ProfileHeader(),
-
-              // _buildHeader(context),
               ProfileName(),
-              // _buildProfileInfo(),
               ProfileCard(),
               EditProfileSection()
             ],

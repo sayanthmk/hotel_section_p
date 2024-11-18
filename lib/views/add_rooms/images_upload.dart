@@ -2,7 +2,7 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/roomprovider.dart';
+import 'package:hotel_side/controllers/room_controller/roomprovider.dart';
 import 'package:hotel_side/views/add_rooms/room_final_review/room_final_review.dart';
 import 'package:hotel_side/widgets/home_page_widgets/alert_box.dart';
 import 'package:hotel_side/widgets/home_page_widgets/button.dart';
@@ -171,7 +171,6 @@ class RoomImageUploadPage extends StatelessWidget {
       floatingActionButton: hotelProvider.roomImages.length < 10
           ? FloatingActionButton(
               onPressed: () {
-                // Show the custom alert dialog using showDialog
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {

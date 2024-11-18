@@ -1,70 +1,86 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/roomprovider.dart';
+import 'package:hotel_side/controllers/room_controller/roomprovider.dart';
 import 'package:hotel_side/views/edit_rooms/edit_rooms.dart';
 import 'package:hotel_side/views/rooms_list/room_detail_view/room_detail_card.dart';
+import 'package:hotel_side/widgets/home_page_widgets/alert_box.dart';
 import 'package:provider/provider.dart';
 
 class RoomDetailPage extends StatelessWidget {
-  final Map<String, dynamic> roomDetails;
-
-  const RoomDetailPage({super.key, required this.roomDetails});
+  const RoomDetailPage({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     final roomProvider = Provider.of<RoomProvider>(context, listen: false);
-
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-        title: const Text(
-          'Room Details',
-          style: TextStyle(
-            color: Color(0xFF1E91B6),
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
+    return Consumer<RoomProvider>(builder: (context, provider, child) {
+      final roomDetails = provider.selectedRoom;
+      return Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          title: const Text(
+            'Room Details',
+            style: TextStyle(
+              color: Color(0xFF1E91B6),
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          actions: [
+            PopupMenuButton<String>(
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
+                PopupMenuItem<String>(
+                  child: const Text('Edit'),
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => RoomEditingPage(),
+                    ));
+                  },
+                ),
+                PopupMenuItem<String>(
+                  child: const Text('Delete'),
+                  onTap: () {
+                    // Delay the dialog showing until after the popup menu is dismissed
+
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return CustomAlertDialog(
+                          contentText: 'Are you sure to delete the room?',
+                          titleText: 'Delete Room',
+                          buttonText1: 'Yes',
+                          buttonText2: 'No',
+                          onPressButton1: () async {
+                            // Delete operation moved to 'Yes' button callback
+                            await roomProvider
+                                .deleteRoom(roomDetails!['room_id']);
+                            provider.clearSelectedRoom();
+                            // Pop both the dialog and the detail page
+                            Navigator.of(context).pop(); // Close dialog
+                            Navigator.of(context)
+                                .pop(); // Go back to previous screen
+                          },
+                          onPressButton2: () {
+                            // Just close the dialog on 'No'
+                            Navigator.of(context).pop();
+                          },
+                        );
+                      },
+                    );
+                  },
+                ),
+              ],
+            )
+          ],
         ),
-        actions: [
-          PopupMenuButton<String>(
-            // onSelected: (value) {
-            //   // Handle menu selection
-            //   ScaffoldMessenger.of(context).showSnackBar(
-            //     SnackBar(content: Text('Selected: $value')),
-            //   );
-            // },
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              PopupMenuItem<String>(
-                // value: '  Edit',
-                child: Text('Edit'),
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) =>
-                        RoomEditingPage(roomDetails: roomDetails),
-                  ));
-                },
-              ),
-              PopupMenuItem<String>(
-                // value: 'Delete',
-                child: Text('Delete'),
-                onTap: () async {
-                  // Directly call deleteRoom when 'Delete' is selected
-                  await roomProvider.deleteRoom(roomDetails['room_id']);
-                  // Optionally, show a SnackBar or navigate back after deletion
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Room deleted successfully')),
-                  );
-                  Navigator.of(context).pop(); // Go back after deletion
-                },
-              ),
-            ],
-          )
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: RoomDetailCard(roomDetails: roomDetails),
-      ),
-    );
+        body: const Padding(
+          padding: EdgeInsets.all(16.0),
+          child: RoomDetailCard(),
+        ),
+      );
+    });
   }
 }

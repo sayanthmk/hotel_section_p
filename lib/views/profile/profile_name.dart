@@ -15,7 +15,6 @@ class ProfileName extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            // 'Denial Rozar',
             '${authService.currentUser?.email?.split('@')[0].toUpperCase()}',
             style: TextStyle(
               fontFamily: 'Montserrat',
@@ -26,7 +25,6 @@ class ProfileName extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           Text(
-            // 'denialrozar@gmail.com',
             authService.currentUser?.email ?? 'User',
             style: TextStyle(
               fontFamily: 'Montserrat',
@@ -34,7 +32,6 @@ class ProfileName extends StatelessWidget {
               color: Colors.grey[600],
             ),
           ),
-          // const SizedBox(height: 20),
         ],
       ),
     );

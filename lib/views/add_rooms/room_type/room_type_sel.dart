@@ -1,11 +1,11 @@
-// room_type_selection.dart
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/roomprovider.dart';
+import 'package:hotel_side/controllers/room_controller/roomprovider.dart';
 import 'package:hotel_side/views/add_rooms/room_facillity/room_facilities.dart';
+import 'package:hotel_side/views/add_rooms/room_type/room_textform.dart';
 import 'package:hotel_side/widgets/home_page_widgets/custom_dropdown.dart';
 import 'package:provider/provider.dart';
 
-import 'room_type.dart';
+import 'room_type_widgets.dart';
 
 class RoomTypeSelection extends StatelessWidget {
   RoomTypeSelection({super.key});
@@ -184,7 +184,7 @@ class RoomTypeSelection extends StatelessWidget {
                   CustomContinueButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        Navigator.of(context).push(
+                        Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (_) => RoomFacility()),
                         );
                       }

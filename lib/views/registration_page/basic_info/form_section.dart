@@ -30,16 +30,10 @@ class BasicInfoFormSection extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: [
-                // Basic Information Section
-                // _buildSectionHeader(
-                //   title: 'Basic Information',
-                //   icon: Icons.hotel,
-                // ),
                 const SectionHeader(
                   title: 'Basic Information',
                   icon: Icons.hotel,
                 ),
-
                 Card(
                   elevation: 2,
                   shape: RoundedRectangleBorder(
@@ -115,12 +109,6 @@ class BasicInfoFormSection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-
-                // Contact Details Section
-                // _buildSectionHeader(
-                //   title: 'Contact Details',
-                //   icon: Icons.contact_phone,
-                // ),
                 const SectionHeader(
                     title: 'Contact Details', icon: Icons.contact_phone),
                 Card(

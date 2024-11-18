@@ -22,20 +22,19 @@ class CustomAlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0), // Rounded corners
+        borderRadius: BorderRadius.circular(20.0),
       ),
       backgroundColor: Colors.white,
-      elevation: 10, // Add shadow for depth
+      elevation: 10,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Title section
             Row(
               children: [
-                Icon(Icons.info_outline,
-                    size: 28, color: Colors.blueAccent), // Add an icon
+                const Icon(Icons.info_outline,
+                    size: 28, color: Colors.blueAccent),
                 const SizedBox(width: 8),
                 Expanded(
                   child: Text(
@@ -49,30 +48,25 @@ class CustomAlertDialog extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 16), // Add space between title and content
-
-            // Content section
+            const SizedBox(height: 16),
             Text(
               contentText,
               style: const TextStyle(
                 fontSize: 16,
                 color: Colors.black54,
               ),
-              textAlign: TextAlign.center, // Center align the content text
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 24), // Space between content and buttons
-
-            // Buttons section
+            const SizedBox(height: 24),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ElevatedButton(
                   onPressed: onPressButton1,
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blueAccent, // Custom button color
+                    backgroundColor: Colors.blueAccent,
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(8.0), // Rounded button
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
                   child: Text(
@@ -86,10 +80,9 @@ class CustomAlertDialog extends StatelessWidget {
                 OutlinedButton(
                   onPressed: onPressButton2,
                   style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.red), // Border color
+                    side: const BorderSide(color: Colors.red),
                     shape: RoundedRectangleBorder(
-                      borderRadius:
-                          BorderRadius.circular(8.0), // Rounded button
+                      borderRadius: BorderRadius.circular(8.0),
                     ),
                   ),
                   child: Text(

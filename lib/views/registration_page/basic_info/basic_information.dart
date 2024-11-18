@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/controllers/field_information/hotel_provider.dart';
+import 'package:hotel_side/controllers/hotel_provider/hotel_provider.dart';
 import 'package:hotel_side/views/registration_page/basic_info/form_section.dart';
 import 'package:hotel_side/views/registration_page/location/manual_location.dart';
 import 'package:hotel_side/widgets/home_page_widgets/button.dart';
@@ -10,7 +10,7 @@ class BasicInformation extends StatelessWidget {
   final TextEditingController bookingSinceController = TextEditingController();
   final TextEditingController contactNumberController = TextEditingController();
   final TextEditingController emailAddressController = TextEditingController();
-    final TextEditingController basePriceController = TextEditingController();
+  final TextEditingController basePriceController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   BasicInformation({super.key});
@@ -24,7 +24,6 @@ class BasicInformation extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            // Header Section
             Container(
               padding: const EdgeInsets.all(20),
               decoration: const BoxDecoration(
@@ -56,18 +55,14 @@ class BasicInformation extends StatelessWidget {
                 ],
               ),
             ),
-
-            // Form Section
             BasicInfoFormSection(
-                formKey: _formKey,
-                hotelNameController: hotelNameController,
-                bookingSinceController: bookingSinceController,
-                contactNumberController: contactNumberController,
-                emailAddressController: emailAddressController,
-                basePriceController:basePriceController,
-                ),
-
-            // Bottom Button
+              formKey: _formKey,
+              hotelNameController: hotelNameController,
+              bookingSinceController: bookingSinceController,
+              contactNumberController: contactNumberController,
+              emailAddressController: emailAddressController,
+              basePriceController: basePriceController,
+            ),
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -93,7 +88,7 @@ class BasicInformation extends StatelessWidget {
                         'contact_number', contactNumberController.text);
                     hotelProvider.updateHotelData(
                         'email_address', emailAddressController.text);
-  hotelProvider.updateHotelData(
+                    hotelProvider.updateHotelData(
                         'property_setup', basePriceController.text);
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => LocationAddByUser(),
@@ -117,5 +112,3 @@ class BasicInformation extends StatelessWidget {
     );
   }
 }
-
- 

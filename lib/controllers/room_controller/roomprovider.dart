@@ -135,7 +135,16 @@ class RoomProvider extends ChangeNotifier {
 
       String roomId = roomRef.id;
 
-      await roomRef.update({'room_id': roomId});
+      Map<String, dynamic> finalRoomData = {
+        ...roomData,
+        'roomId': roomId,
+        'created_at': FieldValue.serverTimestamp(),
+        'status': 'nonbooked'
+      };
+
+      await roomRef.set(finalRoomData);
+
+      // await roomRef.update({'room_id': roomId});
 
       log('Room added to hotel with ID: $hotelId, Room ID: $roomId');
 
@@ -249,15 +258,12 @@ class RoomProvider extends ChangeNotifier {
           .collection('rooms')
           .doc(roomId)
           .delete();
-      // Remove the deleted room from local list
       _roomList.removeWhere((room) => room['room_id'] == roomId);
 
-      // Clear selected room if it was the deleted one
       if (_selectedRoom?['room_id'] == roomId) {
         clearSelectedRoom();
       }
 
-      // Fetch updated rooms after deletion
       await getRooms();
 
       notifyListeners();

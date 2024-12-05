@@ -43,8 +43,6 @@ class RoomDetailPage extends StatelessWidget {
                 PopupMenuItem<String>(
                   child: const Text('Delete'),
                   onTap: () {
-                    // Delay the dialog showing until after the popup menu is dismissed
-
                     showDialog(
                       context: context,
                       builder: (context) {
@@ -54,17 +52,13 @@ class RoomDetailPage extends StatelessWidget {
                           buttonText1: 'Yes',
                           buttonText2: 'No',
                           onPressButton1: () async {
-                            // Delete operation moved to 'Yes' button callback
                             await roomProvider
                                 .deleteRoom(roomDetails!['room_id']);
                             provider.clearSelectedRoom();
-                            // Pop both the dialog and the detail page
-                            Navigator.of(context).pop(); // Close dialog
-                            Navigator.of(context)
-                                .pop(); // Go back to previous screen
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
                           },
                           onPressButton2: () {
-                            // Just close the dialog on 'No'
                             Navigator.of(context).pop();
                           },
                         );

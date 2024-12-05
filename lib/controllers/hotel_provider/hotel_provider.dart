@@ -157,7 +157,7 @@ class HotelProvider extends ChangeNotifier {
 
       log('Hotel submitted successfully with ID: $hotelId');
       clearImages();
-
+      hotelData.clear();
       return hotelId;
     } catch (e) {
       debugPrint('Error submitting hotel: $e');

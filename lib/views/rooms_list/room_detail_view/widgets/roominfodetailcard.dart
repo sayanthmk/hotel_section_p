@@ -40,7 +40,7 @@ class RoomInfoDetailCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Room Area',
+                          'Room Type',
                           style:
                               Theme.of(context).textTheme.titleSmall?.copyWith(
                                     color: Colors.grey[600],
@@ -48,7 +48,7 @@ class RoomInfoDetailCard extends StatelessWidget {
                         ),
                         const SizedBox(height: 4.0),
                         Text(
-                          '${roomDetails!['room_area']}',
+                          '${roomDetails!['room_type']}',
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall

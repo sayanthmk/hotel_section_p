@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/widgets_controller/widgets_controller.dart';
+import 'package:hotel_side/views/bookings/bookings_list.dart';
 import 'package:hotel_side/views/dashboard/hotel_dash.dart';
 import 'package:hotel_side/views/home_page/home.dart';
 import 'package:hotel_side/views/profile/profile_page.dart';
@@ -8,7 +9,7 @@ import 'package:provider/provider.dart';
 class BottomNavScreen extends StatelessWidget {
   final List<Widget> pages = [
     const DashboardPage(),
-    const HomePage(),
+    const BookingsList(),
     const HomePage(),
     const UserProfileScreen(),
   ];

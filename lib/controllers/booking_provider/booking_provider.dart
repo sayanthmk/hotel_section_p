@@ -39,6 +39,3 @@ class BookingProvider extends ChangeNotifier {
     }
   }
 }
-   // _bookingList = bookingsnapshot.docs.map((doc) {
-      //   return BookingSectionModel.fromMap(doc.data() as Map<String, dynamic>);
-      // }).toList();

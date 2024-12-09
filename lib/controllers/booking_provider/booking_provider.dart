@@ -38,4 +38,26 @@ class BookingProvider extends ChangeNotifier {
       throw Exception('Failed to fetch booking details: $e');
     }
   }
+
+
+
+    int? _selectedBookingIndex;
+BookingSectionModel? _selectedBooking;
+
+  int? get selectedBookingIndex => _selectedBookingIndex;
+ BookingSectionModel? get selectedBooking => _selectedBooking;
+
+  void setSelectedBooking(int index) {
+    if (index >= 0 && index < _bookingList.length) {
+      _selectedBookingIndex = index;
+      _selectedBooking = _bookingList[index];
+      // notifyListeners();
+    }
+  }
+
+  void clearSelectedBooking() {
+    _selectedBookingIndex = null;
+    _selectedBooking = null;
+    notifyListeners();
+  }
 }

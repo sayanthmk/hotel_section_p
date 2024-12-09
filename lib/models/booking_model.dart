@@ -1,31 +1,48 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class BookingSectionModel {
+  final String hotelId;
+  final String bookId;
   final String customerId;
   final int age;
-  final Timestamp bookingDate;
   final String name;
   final int numberOfAdults;
   final String userId;
+  final DateTime startdate;
+  final DateTime enddate;
 
   BookingSectionModel({
+    required this.hotelId,
+    required this.bookId,
     required this.customerId,
     required this.age,
-    required this.bookingDate,
     required this.name,
     required this.numberOfAdults,
     required this.userId,
+    required this.startdate,
+    required this.enddate,
   });
 
-  // Factory method to create a Booking object from Firestore data
-  factory BookingSectionModel.fromMap(Map<String, dynamic> map) {
+  factory BookingSectionModel.fromMap(
+    Map<String, dynamic> map,
+  ) {
+    final res = map['bookingDetails'];
     return BookingSectionModel(
-      customerId: map['cuid'] ?? '',
-      age: map['age'] ?? 0,
-      bookingDate: map['date'] ?? '',
-      name: map['name'] ?? '',
-      numberOfAdults: map['noa'] ?? 0,
-      userId: map['userId'] ?? '',
+      hotelId: map['hotelId'] ?? '',
+      bookId: map['bookingId'] ?? '',
+      customerId: res['cuid'] ?? '',
+      age: res['age'] ?? 0,
+      name: res['name'] ?? '',
+      numberOfAdults: res['noa'] ?? 0,
+      userId: res['userId'] ?? '',
+      // startdate: (res['startdate']) ?? DateTime.now(),
+      // enddate: (res['enddate']) ?? DateTime.now(),
+      startdate: (res['startdate'] != null && res['startdate'] is Timestamp)
+          ? (res['startdate'] as Timestamp).toDate()
+          : DateTime.now(),
+      enddate: (res['enddate'] != null && res['enddate'] is Timestamp)
+          ? (res['enddate'] as Timestamp).toDate()
+          : DateTime.now(),
     );
   }
 }

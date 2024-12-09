@@ -1,36 +1,73 @@
-// class Rooms {
-//   Map<String, dynamic> roomsdetails;
+// class RoomModel {
+//   final String roomId;
+//   final String roomArea;
+//   final String roomType;
+//   final int propertySize;
+//   final int extraBedType;
+//   final bool cupboard;
+//   final bool wardrobe;
+//   final bool freeBreakfast;
+//   final bool freeLunch;
+//   final bool freeDinner;
+//   final int basePrice;
+//   final int extraAdultsAllowed;
+//   final int extraChildrenAllowed;
+//   final bool laundry;
+//   final bool elevator;
+//   final bool airConditioner;
+//   final bool houseKeeping;
+//   final bool kitchen;
+//   final bool wifi;
+//   final bool parking;
+//   final List<String> images;
 
-//   Rooms(this.roomsdetails);
+//   RoomModel({
+//     required this.roomId,
+//     required this.roomArea,
+//     required this.roomType,
+//     required this.propertySize,
+//     required this.extraBedType,
+//     required this.cupboard,
+//     required this.wardrobe,
+//     required this.freeBreakfast,
+//     required this.freeLunch,
+//     required this.freeDinner,
+//     required this.basePrice,
+//     required this.extraAdultsAllowed,
+//     required this.extraChildrenAllowed,
+//     required this.laundry,
+//     required this.elevator,
+//     required this.airConditioner,
+//     required this.houseKeeping,
+//     required this.kitchen,
+//     required this.wifi,
+//     required this.parking,
+//     required this.images,
+//   });
 
-//   Map<String, dynamic> addrooms() {
-//     return {
-//       "rooms details": {
-//         "room_area": roomsdetails['room_area'], //string
-//         "accomadation_type": roomsdetails['accomadation_type'], //string
-//         "Property Size": roomsdetails['Property Size'], //integer
-//         "Select Extra Bed Types":
-//             roomsdetails['Select Extra Bed Types'], //string
-//         "Cupboard": roomsdetails['Cupboard'], //bool
-//         "Wardrobe": roomsdetails['Wardrobe'], //bool
-//         "Accommodation Only": roomsdetails['Accommodation Only'], //bool
-//         "Free Breakfast": roomsdetails['Free Breakfast'], //bool
-//         "Free Lunch": roomsdetails['Free Lunch'], //bool
-//         "Free Dinner": roomsdetails['Free Dinner'], //bool
-//         "Base Price": roomsdetails['Base Price'], //integer
-//         "Number of Extra Adults Allowed":
-//             roomsdetails['Number of Extra Adults Allowed'], //integer
-//         "Number of Extra Child Allowed":
-//             roomsdetails['Number of Extra Child Allowed'], //integer
-//         "Laundry": roomsdetails['Laundry'], //bool
-//         "Elevator": roomsdetails['Elevator'], //bool
-//         "Air Conditioner": roomsdetails['Air Conditioner'], //bool
-//         "House Keeping": roomsdetails['House Keeping'], //bool
-//         "Kitchen": roomsdetails['Kitchen'], //bool
-//         "Wifi": roomsdetails['Wifi'], //bool
-//         "Parking": roomsdetails['Parking'], //bool
-//         "images": roomsdetails['images'], //list
-//       }
-//     };
+//   factory RoomModel.fromMap(Map<String, dynamic> map) {
+//     return RoomModel(
+//       roomId: map['roomId'] ?? '',
+//       roomArea: map['room_area'] ?? '',
+//       roomType: map['room_type'] ?? '',
+//       propertySize: map['Property Size'] ?? 0,
+//       extraBedType: map['Select Extra Bed Types'] ?? 0,
+//       cupboard: map['Cupboard'] ?? false,
+//       wardrobe: map['Wardrobe'] ?? false,
+//       freeBreakfast: map['Free Breakfast'] ?? false,
+//       freeLunch: map['Free Lunch'] ?? false,
+//       freeDinner: map['Free Dinner'] ?? false,
+//       basePrice: map['Base Price'] ?? 0,
+//       extraAdultsAllowed: map['Number of Extra Adults Allowed'] ?? 0,
+//       extraChildrenAllowed: map['Number of Extra Child Allowed'] ?? 0,
+//       laundry: map['Laundry'] ?? false,
+//       elevator: map['Elevator'] ?? false,
+//       airConditioner: map['Air Conditioner'] ?? false,
+//       houseKeeping: map['House Keeping'] ?? false,
+//       kitchen: map['Kitchen'] ?? false,
+//       wifi: map['Wifi'] ?? false,
+//       parking: map['Parking'] ?? false,
+//       images: List<String>.from(map['room_images'] ?? []),
+//     );
 //   }
 // }

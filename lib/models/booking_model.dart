@@ -7,6 +7,7 @@ class BookingSectionModel {
   final int age;
   final String name;
   final int numberOfAdults;
+  final int numberOfChilds;
   final String userId;
   final DateTime startdate;
   final DateTime enddate;
@@ -18,6 +19,7 @@ class BookingSectionModel {
     required this.age,
     required this.name,
     required this.numberOfAdults,
+    required this.numberOfChilds,
     required this.userId,
     required this.startdate,
     required this.enddate,
@@ -34,6 +36,7 @@ class BookingSectionModel {
       age: res['age'] ?? 0,
       name: res['name'] ?? '',
       numberOfAdults: res['noa'] ?? 0,
+      numberOfChilds: res['noc'] ?? 0,
       userId: res['userId'] ?? '',
       // startdate: (res['startdate']) ?? DateTime.now(),
       // enddate: (res['enddate']) ?? DateTime.now(),

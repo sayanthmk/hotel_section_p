@@ -42,15 +42,7 @@ class HotelTypeSelection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Progress Indicator
-                // const LinearProgressIndicator(
-                //   value: 0.2, // 20% progress
-                //   backgroundColor: Color(0xFFE0E0E0),
-                //   valueColor: AlwaysStoppedAnimation<Color>(Color(0xff1E91B6)),
-                // ),
                 const SizedBox(height: 32),
-
-                // Main Title and Description
                 const Text(
                   'What would you like to list?',
                   style: TextStyle(
@@ -68,8 +60,6 @@ class HotelTypeSelection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 32),
-
-                // Property Type Dropdown
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -108,8 +98,6 @@ class HotelTypeSelection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 24),
-
-                // Property Setup Options
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
@@ -136,7 +124,6 @@ class HotelTypeSelection extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       CustomCheckboxTile(
-                        // context: context,
                         title: 'Entire Property',
                         subtitle:
                             'Guests will have the whole place to themselves',
@@ -149,7 +136,6 @@ class HotelTypeSelection extends StatelessWidget {
                       ),
                       const Divider(height: 24),
                       CustomCheckboxTile(
-                        // context: context,
                         title: 'Private Property',
                         subtitle: 'Guests will have their own private space',
                         value: hotelProvider.hotelData['private_property'] ??
@@ -163,8 +149,6 @@ class HotelTypeSelection extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 40),
-
-                // Next Button
                 Center(
                   child: HotelButton(
                     text: "Continue",

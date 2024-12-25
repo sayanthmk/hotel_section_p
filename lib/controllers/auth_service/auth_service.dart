@@ -20,7 +20,7 @@ class AuthService with ChangeNotifier {
       return result.user;
       // log('sign in called');
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
       return null;
     }
   }
@@ -34,7 +34,7 @@ class AuthService with ChangeNotifier {
       notifyListeners();
       return result.user;
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
       return null;
     }
   }
@@ -55,7 +55,7 @@ class AuthService with ChangeNotifier {
       notifyListeners();
       return result.user;
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
       return null;
     }
   }
@@ -82,7 +82,7 @@ class AuthService with ChangeNotifier {
       notifyListeners();
       return result.user;
     } catch (e) {
-      print(e.toString());
+      log(e.toString());
       return null;
     }
   }
@@ -91,8 +91,8 @@ class AuthService with ChangeNotifier {
     await _googleSignIn.signOut();
     await _auth.signOut();
     notifyListeners();
-    // Clear the hotelId from SharedPreferences
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove('hotelId'); // Remove hotelId from SharedPreferences
+    await prefs.remove('hotelId');
   }
 }

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:hotel_side/constants/colors/colors.dart';
 import 'package:hotel_side/views/dashboard/grid_container/custom_card.dart';
 import 'package:hotel_side/views/dashboard/grid_container/pecentage.dart';
-import 'package:hotel_side/views/dashboard/recent_bookings/recent_bookings.dart';
 import 'package:hotel_side/views/dashboard/rooms_section/rooms_card.dart';
 import 'package:hotel_side/views/dashboard/welcome_card/welcome_card.dart';
 
@@ -68,8 +67,8 @@ class DashboardPage extends StatelessWidget {
               ),
               const SizedBox(height: 24),
               const RoomStatusCard(),
-              const SizedBox(height: 24),
-              const RecentBookings(),
+              // const SizedBox(height: 24),
+              // const RecentBookings(),
             ],
           ),
         ),

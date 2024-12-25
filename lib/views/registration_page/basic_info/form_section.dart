@@ -35,6 +35,7 @@ class BasicInfoFormSection extends StatelessWidget {
                   icon: Icons.hotel,
                 ),
                 Card(
+                  color: Colors.white,
                   elevation: 2,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
@@ -112,6 +113,7 @@ class BasicInfoFormSection extends StatelessWidget {
                 const SectionHeader(
                     title: 'Contact Details', icon: Icons.contact_phone),
                 Card(
+                  color: Colors.white,
                   elevation: 2,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),

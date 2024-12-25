@@ -11,7 +11,7 @@ class HotelCheckPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hotelProvider = Provider.of<HotelProvider>(context);
+    final hotelProvider = Provider.of<HotelProvider>(context, listen: false);
 
     Future<String?> checkHotelRegistration() async {
       return await hotelProvider.checkHotelRegistration();

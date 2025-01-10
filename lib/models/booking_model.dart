@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class BookingSectionModel {
   final String hotelId;
   final String bookId;
-  final String customerId;
+  final String roomId;
   final int age;
   final String name;
   final int numberOfAdults;
@@ -11,11 +11,12 @@ class BookingSectionModel {
   final String userId;
   final DateTime startdate;
   final DateTime enddate;
+  final double paidAmount;
 
   BookingSectionModel({
     required this.hotelId,
     required this.bookId,
-    required this.customerId,
+    required this.roomId,
     required this.age,
     required this.name,
     required this.numberOfAdults,
@@ -23,6 +24,7 @@ class BookingSectionModel {
     required this.userId,
     required this.startdate,
     required this.enddate,
+    required this.paidAmount,
   });
 
   factory BookingSectionModel.fromMap(
@@ -32,12 +34,13 @@ class BookingSectionModel {
     return BookingSectionModel(
       hotelId: map['hotelId'] ?? '',
       bookId: map['bookingId'] ?? '',
-      customerId: res['cuid'] ?? '',
+      roomId: res['cuid'] ?? '',
       age: res['age'] ?? 0,
       name: res['name'] ?? '',
       numberOfAdults: res['noa'] ?? 0,
       numberOfChilds: res['noc'] ?? 0,
       userId: res['userId'] ?? '',
+      paidAmount: res['paidAmount'] ?? 0,
       // startdate: (res['startdate']) ?? DateTime.now(),
       // enddate: (res['enddate']) ?? DateTime.now(),
       startdate: (res['startdate'] != null && res['startdate'] is Timestamp)

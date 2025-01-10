@@ -172,20 +172,6 @@ class RoomEditingPage extends StatelessWidget {
       );
     });
   }
-
-  // Widget _buildSwitchTile(
-  //   BuildContext context,
-  //   String title,
-  //   bool value,
-  //   Function(bool) onChanged,
-  // ) {
-  //   return SwitchListTile(
-  //     title: Text(title),
-  //     value: value,
-  //     onChanged: onChanged,
-  //     activeColor: const Color(0xFF1E91B6),
-  //   );
-  // }
 }
 
 
@@ -565,3 +551,16 @@ class RoomEditingPage extends StatelessWidget {
                             // 'Wifi': roomDetails['Wifi'],
                             // 'Parking': roomDetails['Parking'],
                             // 'room_images': roomDetails['room_images'],
+                              // Widget _buildSwitchTile(
+  //   BuildContext context,
+  //   String title,
+  //   bool value,
+  //   Function(bool) onChanged,
+  // ) {
+  //   return SwitchListTile(
+  //     title: Text(title),
+  //     value: value,
+  //     onChanged: onChanged,
+  //     activeColor: const Color(0xFF1E91B6),
+  //   );
+  // }

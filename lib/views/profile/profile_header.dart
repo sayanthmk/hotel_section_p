@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hotel_side/views/home_page/home.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({
@@ -29,7 +30,11 @@ class ProfileHeader extends StatelessWidget {
                   children: [
                     IconButton(
                       icon: const Icon(Icons.settings, color: Colors.white),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ));
+                      },
                     ),
                   ],
                 ),

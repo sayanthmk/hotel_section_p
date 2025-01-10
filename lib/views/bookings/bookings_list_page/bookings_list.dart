@@ -16,7 +16,7 @@ class BookingsList extends StatelessWidget {
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: const Text(
-          'Your Bookings',
+          'My Bookings',
           style: TextStyle(
             color: Colors.white,
             fontSize: 24,
@@ -70,12 +70,12 @@ class BookingsList extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 itemCount: bookings.length,
                 itemBuilder: (context, index) {
-                  provider.setSelectedBooking(index);
                   final booking = bookings[index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 16),
                     child: InkWell(
                       onTap: () {
+                        provider.setSelectedBooking(index);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

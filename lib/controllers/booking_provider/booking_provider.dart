@@ -27,10 +27,10 @@ class BookingProvider extends ChangeNotifier {
       // Clear the list to avoid duplicates.
 
       for (var doc in bookingsnapshot.docs) {
-        log('Document Data: ${doc.data()}');
+        // log('Document Data: ${doc.data()}');
         _bookingList.add(
             BookingSectionModel.fromMap(doc.data() as Map<String, dynamic>));
-        log(_bookingList.toString());
+        // log(_bookingList.toString());
         // return bookingList;
       }
       notifyListeners();
@@ -39,13 +39,40 @@ class BookingProvider extends ChangeNotifier {
     }
   }
 
+  Future<double> getPaymentTotal() async {
+    if (userId == null) {
+      throw Exception('No user is logged in.');
+    }
 
+    try {
+      // Fetch all booking documents for the user
+      QuerySnapshot bookingSnapshot = await _firestore
+          .collection('approved_hotels')
+          .doc(userId)
+          .collection('bookings')
+          .get();
 
-    int? _selectedBookingIndex;
-BookingSectionModel? _selectedBooking;
+      // Sum the paidAmount from each booking's bookingDetails
+      double totalPaidAmount = bookingSnapshot.docs.fold(0.0, (sum, doc) {
+        final bookingDetails = doc.data() as Map<String, dynamic>;
+        final paidAmount =
+            (bookingDetails['bookingDetails']?['paidAmount'] ?? 0) as num;
+        return sum + paidAmount.toDouble();
+      });
+
+      notifyListeners();
+      // log(totalPaidAmount.toString());
+      return totalPaidAmount;
+    } catch (e) {
+      throw Exception('Failed to fetch booking details: $e');
+    }
+  }
+
+  int? _selectedBookingIndex;
+  BookingSectionModel? _selectedBooking;
 
   int? get selectedBookingIndex => _selectedBookingIndex;
- BookingSectionModel? get selectedBooking => _selectedBooking;
+  BookingSectionModel? get selectedBooking => _selectedBooking;
 
   void setSelectedBooking(int index) {
     if (index >= 0 && index < _bookingList.length) {

@@ -15,7 +15,6 @@ class RoomDetailCard extends StatelessWidget {
       final roomDetails = provider.selectedRoom;
 
       if (roomDetails == null) {
-        // Fallback UI if roomDetails is null
         return Center(
           child: Text(
             'No room details available',

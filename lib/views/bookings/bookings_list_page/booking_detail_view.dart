@@ -133,9 +133,7 @@ class BookingDetailView extends StatelessWidget {
                             child: BookingInfoItem(
                               icon: Icons.hotel_outlined,
                               label: 'Customer ID',
-                              value: booking.customerId
-                                  .toUpperCase()
-                                  .substring(14),
+                              value: booking.roomId.toUpperCase().substring(14),
                               color: Colors.teal,
                             ),
                           ),

@@ -1,73 +1,97 @@
-// class RoomModel {
-//   final String roomId;
-//   final String roomArea;
-//   final String roomType;
-//   final int propertySize;
-//   final int extraBedType;
-//   final bool cupboard;
-//   final bool wardrobe;
-//   final bool freeBreakfast;
-//   final bool freeLunch;
-//   final bool freeDinner;
-//   final int basePrice;
-//   final int extraAdultsAllowed;
-//   final int extraChildrenAllowed;
-//   final bool laundry;
-//   final bool elevator;
-//   final bool airConditioner;
-//   final bool houseKeeping;
-//   final bool kitchen;
-//   final bool wifi;
-//   final bool parking;
-//   final List<String> images;
+class RoomModel {
+  String roomArea;
+  String roomType;
+  int propertySize;
+  int selectExtraBedTypes;
+  bool cupboard;
+  bool wardrobe;
+  bool freeBreakfast;
+  bool freeLunch;
+  bool freeDinner;
+  int basePrice;
+  int numberOfExtraAdultsAllowed;
+  int numberOfExtraChildrenAllowed;
+  bool laundry;
+  bool elevator;
+  bool airConditioner;
+  bool houseKeeping;
+  bool kitchen;
+  bool wifi;
+  bool parking;
+  List<String> roomImages;
 
-//   RoomModel({
-//     required this.roomId,
-//     required this.roomArea,
-//     required this.roomType,
-//     required this.propertySize,
-//     required this.extraBedType,
-//     required this.cupboard,
-//     required this.wardrobe,
-//     required this.freeBreakfast,
-//     required this.freeLunch,
-//     required this.freeDinner,
-//     required this.basePrice,
-//     required this.extraAdultsAllowed,
-//     required this.extraChildrenAllowed,
-//     required this.laundry,
-//     required this.elevator,
-//     required this.airConditioner,
-//     required this.houseKeeping,
-//     required this.kitchen,
-//     required this.wifi,
-//     required this.parking,
-//     required this.images,
-//   });
+  RoomModel({
+    required this.roomArea,
+    required this.roomType,
+    required this.propertySize,
+    required this.selectExtraBedTypes,
+    required this.cupboard,
+    required this.wardrobe,
+    required this.freeBreakfast,
+    required this.freeLunch,
+    required this.freeDinner,
+    required this.basePrice,
+    required this.numberOfExtraAdultsAllowed,
+    required this.numberOfExtraChildrenAllowed,
+    required this.laundry,
+    required this.elevator,
+    required this.airConditioner,
+    required this.houseKeeping,
+    required this.kitchen,
+    required this.wifi,
+    required this.parking,
+    required this.roomImages,
+  });
 
-//   factory RoomModel.fromMap(Map<String, dynamic> map) {
-//     return RoomModel(
-//       roomId: map['roomId'] ?? '',
-//       roomArea: map['room_area'] ?? '',
-//       roomType: map['room_type'] ?? '',
-//       propertySize: map['Property Size'] ?? 0,
-//       extraBedType: map['Select Extra Bed Types'] ?? 0,
-//       cupboard: map['Cupboard'] ?? false,
-//       wardrobe: map['Wardrobe'] ?? false,
-//       freeBreakfast: map['Free Breakfast'] ?? false,
-//       freeLunch: map['Free Lunch'] ?? false,
-//       freeDinner: map['Free Dinner'] ?? false,
-//       basePrice: map['Base Price'] ?? 0,
-//       extraAdultsAllowed: map['Number of Extra Adults Allowed'] ?? 0,
-//       extraChildrenAllowed: map['Number of Extra Child Allowed'] ?? 0,
-//       laundry: map['Laundry'] ?? false,
-//       elevator: map['Elevator'] ?? false,
-//       airConditioner: map['Air Conditioner'] ?? false,
-//       houseKeeping: map['House Keeping'] ?? false,
-//       kitchen: map['Kitchen'] ?? false,
-//       wifi: map['Wifi'] ?? false,
-//       parking: map['Parking'] ?? false,
-//       images: List<String>.from(map['room_images'] ?? []),
-//     );
-//   }
-// }
+  // Convert a Room object to JSON
+  Map<String, dynamic> toJson() {
+    return {
+      "room_area": roomArea,
+      "room_type": roomType,
+      "Property Size": propertySize,
+      "Select Extra Bed Types": selectExtraBedTypes,
+      "Cupboard": cupboard,
+      "Wardrobe": wardrobe,
+      "Free Breakfast": freeBreakfast,
+      "Free Lunch": freeLunch,
+      "Free Dinner": freeDinner,
+      "Base Price": basePrice,
+      "Number of Extra Adults Allowed": numberOfExtraAdultsAllowed,
+      "Number of Extra Child Allowed": numberOfExtraChildrenAllowed,
+      "Laundry": laundry,
+      "Elevator": elevator,
+      "Air Conditioner": airConditioner,
+      "House Keeping": houseKeeping,
+      "Kitchen": kitchen,
+      "Wifi": wifi,
+      "Parking": parking,
+      "room_images": roomImages,
+    };
+  }
+
+  // Create a Room object from JSON
+  factory RoomModel.fromJson(Map<String, dynamic> json) {
+    return RoomModel(
+      roomArea: json["room_area"] ?? '',
+      roomType: json["room_type"] ?? '',
+      propertySize: json["Property Size"] ?? 0,
+      selectExtraBedTypes: json["Select Extra Bed Types"] ?? 0,
+      cupboard: json["Cupboard"] ?? false,
+      wardrobe: json["Wardrobe"] ?? false,
+      freeBreakfast: json["Free Breakfast"] ?? false,
+      freeLunch: json["Free Lunch"] ?? false,
+      freeDinner: json["Free Dinner"] ?? false,
+      basePrice: json["Base Price"] ?? 0,
+      numberOfExtraAdultsAllowed: json["Number of Extra Adults Allowed"] ?? 0,
+      numberOfExtraChildrenAllowed: json["Number of Extra Child Allowed"] ?? 0,
+      laundry: json["Laundry"] ?? false,
+      elevator: json["Elevator"] ?? false,
+      airConditioner: json["Air Conditioner"] ?? false,
+      houseKeeping: json["House Keeping"] ?? false,
+      kitchen: json["Kitchen"] ?? false,
+      wifi: json["Wifi"] ?? false,
+      parking: json["Parking"] ?? false,
+      roomImages: List<String>.from(json["room_images"] ?? []),
+    );
+  }
+}

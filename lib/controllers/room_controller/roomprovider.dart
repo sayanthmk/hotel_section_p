@@ -241,6 +241,49 @@ class RoomProvider extends ChangeNotifier {
     }
   }
 
+  ///////////////////////////////////////////////////////////
+  ///
+  Future<void> getRoomById(String roomId) async {
+    try {
+      // Get the current user's ID
+      String userId = FirebaseAuth.instance.currentUser!.uid;
+
+      // Fetch the hotel document for the current user
+      DocumentSnapshot hotelDoc =
+          await _firestore.collection('approved_hotels').doc(userId).get();
+
+      if (!hotelDoc.exists) {
+        log('Hotel document does not exist for userId: $userId');
+        throw Exception(
+            'Hotel document does not exist. Please submit the hotel first.');
+      }
+
+      // Fetch the specific room document by roomId
+      DocumentSnapshot roomDoc = await _firestore
+          .collection('approved_hotels')
+          .doc(userId)
+          .collection('rooms')
+          .doc(roomId)
+          .get();
+
+      if (!roomDoc.exists) {
+        log('Room document does not exist for roomId: $roomId');
+        throw Exception('Room not found. Please check the room ID.');
+      }
+
+      // Update the selected room data
+      Map<String, dynamic> roomDetails = roomDoc.data() as Map<String, dynamic>;
+      log('Room details fetched: $roomDetails');
+      _selectedRoom = roomDetails;
+
+      notifyListeners();
+    } catch (e) {
+      log('Error fetching room details: $e');
+      throw Exception('Failed to fetch room details. Error: $e');
+    }
+  }
+////////////////////////////////////////
+
   Future<void> deleteRoom(String roomId) async {
     try {
       String userId = FirebaseAuth.instance.currentUser!.uid;
@@ -292,4 +335,19 @@ class RoomProvider extends ChangeNotifier {
     _selectedRoom = null;
     notifyListeners();
   }
+
+  ///////////////////////////////////////////
+  // int? _selectedBookingRoomIndex;
+  // RoomModel? _selectedBookingRoom;
+
+  // int? get selectedBookingRoomIndex => _selectedBookingRoomIndex;
+  // RoomModel? get selectedBookingRoom => _selectedBookingRoom;
+
+  // void setSelectedBookingRoom(int index) {
+  //   if (index >= 0 && index < _roomList.length) {
+  //     _selectedBookingRoomIndex = index;
+  //     _selectedRoom = _roomList[index];
+  //     // notifyListeners();
+  //   }
+  // }
 }

@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/booking_provider/booking_provider.dart';
 import 'package:hotel_side/controllers/hotel_provider/hotel_provider.dart';
+import 'package:hotel_side/controllers/reviewcontroller/review_provider.dart';
 import 'package:hotel_side/controllers/room_controller/roomprovider.dart';
 import 'package:hotel_side/controllers/widgets_controller/widgets_controller.dart';
 import 'package:hotel_side/views/splash_screen/splash.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => RoomProvider()),
         ChangeNotifierProvider(create: (_) => WidgetsController()),
         ChangeNotifierProvider(create: (_) => BookingProvider()),
+        ChangeNotifierProvider(create: (_) => ReviewProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

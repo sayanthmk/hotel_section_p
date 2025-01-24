@@ -6,6 +6,7 @@ import 'package:hotel_side/views/dashboard/grid_container/custom_card.dart';
 import 'package:hotel_side/views/dashboard/grid_container/pecentage.dart';
 import 'package:hotel_side/views/dashboard/rooms_section/rooms_card.dart';
 import 'package:hotel_side/views/dashboard/welcome_card/welcome_card.dart';
+import 'package:hotel_side/views/payments/payment.dart';
 import 'package:hotel_side/views/rooms_list/rooms_list.dart';
 import 'package:provider/provider.dart';
 
@@ -70,6 +71,14 @@ class DashboardPage extends StatelessWidget {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(
                           child: EnhancedBookingCard(
+                            ontap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      const SortPaymentByDatePage(),
+                                ),
+                              );
+                            },
                             icon: Icons.money,
                             iconColor: Colors.green,
                             iconBackgroundColor: Colors.green[100]!,
@@ -83,6 +92,14 @@ class DashboardPage extends StatelessWidget {
                       } else {
                         final totalAmount = snapshot.data ?? 0.0;
                         return EnhancedBookingCard(
+                          ontap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const SortPaymentByDatePage(),
+                              ),
+                            );
+                          },
                           icon: Icons.money,
                           iconColor: Colors.green,
                           iconBackgroundColor: Colors.green[100]!,

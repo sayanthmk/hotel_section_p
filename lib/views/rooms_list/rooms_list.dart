@@ -36,9 +36,6 @@ class RoomListPage extends StatelessWidget {
                 padding: const EdgeInsets.all(16),
                 itemCount: rooms.length,
                 itemBuilder: (context, index) {
-                  // WidgetsBinding.instance.addPostFrameCallback((_) {
-                  //   roomProvider.setSelectedRoom(index);
-                  // });
                   provider.setSelectedRoom(index);
                   return const RoomCard();
                 },

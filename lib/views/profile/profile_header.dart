@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/views/home_page/home.dart';
+import 'package:hotel_side/views/settings/settings.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({
@@ -32,7 +32,7 @@ class ProfileHeader extends StatelessWidget {
                       icon: const Icon(Icons.settings, color: Colors.white),
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => const HomePage(),
+                          builder: (context) => const SettingsPage(),
                         ));
                       },
                     ),

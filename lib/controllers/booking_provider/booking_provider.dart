@@ -1,9 +1,9 @@
-import 'dart:developer';
 import 'package:flutter/foundation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hotel_side/models/booking_model.dart';
+import 'package:intl/intl.dart';
 
 class BookingProvider extends ChangeNotifier {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -24,7 +24,6 @@ class BookingProvider extends ChangeNotifier {
           .get();
 
       _bookingList.clear();
-      // Clear the list to avoid duplicates.
 
       for (var doc in bookingsnapshot.docs) {
         // log('Document Data: ${doc.data()}');
@@ -52,13 +51,15 @@ class BookingProvider extends ChangeNotifier {
           .collection('bookings')
           .get();
 
-      // Sum the paidAmount from each booking's bookingDetails
-      double totalPaidAmount = bookingSnapshot.docs.fold(0.0, (sum, doc) {
-        final bookingDetails = doc.data() as Map<String, dynamic>;
-        final paidAmount =
-            (bookingDetails['bookingDetails']?['paidAmount'] ?? 0) as num;
-        return sum + paidAmount.toDouble();
-      });
+      double totalPaidAmount = bookingSnapshot.docs.fold(
+        0.0,
+        (sumofpaidamount, doc) {
+          final bookingDetails = doc.data() as Map<String, dynamic>;
+          final paidAmount =
+              (bookingDetails['bookingDetails']?['paidAmount'] ?? 0) as num;
+          return sumofpaidamount + paidAmount.toDouble();
+        },
+      );
 
       notifyListeners();
       // log(totalPaidAmount.toString());
@@ -66,6 +67,44 @@ class BookingProvider extends ChangeNotifier {
     } catch (e) {
       throw Exception('Failed to fetch booking details: $e');
     }
+  }
+
+  /// List payments grouped by booking date
+  Map<String, List<BookingSectionModel>> getPaymentsGroupedByBookingDate() {
+    // Create a map to store bookings grouped by date
+    Map<String, List<BookingSectionModel>> groupedPayments = {};
+
+    for (var booking in _bookingList) {
+      // Format the booking date to 'yyyy-MM-dd' to group by day
+      String formattedDate =
+          DateFormat('yyyy-MM-dd').format(booking.bookingDate);
+
+      // Add booking to the appropriate group
+      if (groupedPayments.containsKey(formattedDate)) {
+        groupedPayments[formattedDate]!.add(booking);
+      } else {
+        groupedPayments[formattedDate] = [booking];
+      }
+    }
+
+    return groupedPayments;
+  }
+
+  /// Display total payments for each date
+  List<Map<String, dynamic>> getTotalPaymentsByDate() {
+    final groupedPayments = getPaymentsGroupedByBookingDate();
+
+    // Create a list of total payments per date
+    return groupedPayments.entries.map((entry) {
+      double totalAmount =
+          entry.value.fold(0.0, (sum, booking) => sum + booking.paidAmount);
+
+      return {
+        'date': entry.key,
+        'totalPaidAmount': totalAmount,
+        'bookings': entry.value,
+      };
+    }).toList();
   }
 
   int? _selectedBookingIndex;
@@ -88,3 +127,37 @@ class BookingProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+// Future<List<Map<String, dynamic>>> getSortedPaymentsByDate() async {
+  //   if (userId == null) {
+  //     throw Exception('No user is logged in.');
+  //   }
+
+  //   try {
+  //     QuerySnapshot bookingSnapshot = await _firestore
+  //         .collection('approved_hotels')
+  //         .doc(userId)
+  //         .collection('bookings')
+  //         .get();
+
+  //     List<Map<String, dynamic>> payments = bookingSnapshot.docs.map((doc) {
+  //       final data = doc.data() as Map<String, dynamic>;
+  //       final bookingDetails = data['bookingDetails'] as Map<String, dynamic>?;
+  //       final bookingDate = bookingDetails?['currentDate'];
+  //       final paidAmount = bookingDetails?['paidAmount'] ?? 0;
+
+  //       return {
+  //         'currentDate': bookingDate != null
+  //             ? DateTime.tryParse(bookingDate) ?? DateTime(1900)
+  //             : DateTime(1900),
+  //         'paidAmount': paidAmount,
+  //         'bookingDetails': bookingDetails,
+  //       };
+  //     }).toList();
+
+  //     payments.sort((a, b) => a['currentDate'].compareTo(b['currentDate']));
+
+  //     return payments;
+  //   } catch (e) {
+  //     throw Exception('Failed to sort payments by date: $e');
+  //   }
+  // }

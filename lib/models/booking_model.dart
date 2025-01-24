@@ -12,6 +12,7 @@ class BookingSectionModel {
   final DateTime startdate;
   final DateTime enddate;
   final double paidAmount;
+  final DateTime bookingDate;
 
   BookingSectionModel({
     required this.hotelId,
@@ -25,6 +26,7 @@ class BookingSectionModel {
     required this.startdate,
     required this.enddate,
     required this.paidAmount,
+    required this.bookingDate,
   });
 
   factory BookingSectionModel.fromMap(
@@ -41,14 +43,16 @@ class BookingSectionModel {
       numberOfChilds: res['noc'] ?? 0,
       userId: res['userId'] ?? '',
       paidAmount: res['paidAmount'] ?? 0,
-      // startdate: (res['startdate']) ?? DateTime.now(),
-      // enddate: (res['enddate']) ?? DateTime.now(),
       startdate: (res['startdate'] != null && res['startdate'] is Timestamp)
           ? (res['startdate'] as Timestamp).toDate()
           : DateTime.now(),
       enddate: (res['enddate'] != null && res['enddate'] is Timestamp)
           ? (res['enddate'] as Timestamp).toDate()
           : DateTime.now(),
+      bookingDate:
+          (res['bookingDate'] != null && res['bookingDate'] is Timestamp)
+              ? (res['bookingDate'] as Timestamp).toDate()
+              : DateTime.now(),
     );
   }
 }

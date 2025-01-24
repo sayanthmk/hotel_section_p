@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/hotel_provider/hotel_provider.dart';
 import 'package:hotel_side/views/auth/route_page.dart';
@@ -112,6 +110,7 @@ class HomePage extends StatelessWidget {
               child: const Text('Sign Out'),
               onPressed: () async {
                 await authService.signOut();
+                // ignore: use_build_context_synchronously
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => const AuthSelectionPage(),
                 ));

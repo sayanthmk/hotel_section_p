@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -24,14 +23,12 @@ class ReviewProvider extends ChangeNotifier {
           .get();
 
       _reviewsList.clear();
-      // Clear the list to avoid duplicates.
 
       for (var doc in bookingsnapshot.docs) {
         log('Document Data: ${doc.data()}');
         _reviewsList
             .add(ReviewsModel.fromMap(doc.data() as Map<String, dynamic>));
         log(_reviewsList.toString());
-        // return bookingList;
       }
       notifyListeners();
     } catch (e) {

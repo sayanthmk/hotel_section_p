@@ -33,12 +33,9 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Firebase Auth Demo',
         theme: ThemeData(
-          // fontFamily: 'Montserrat',
           primarySwatch: Colors.blue,
         ),
         home: const AuthWrapper(),
-
-        // home: RoomsSubmissionPage(),
       ),
     );
   }

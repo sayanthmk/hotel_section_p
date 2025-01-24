@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/reviewcontroller/review_provider.dart';
-import 'package:hotel_side/views/bookings/bookings_list_page/booking_header.dart';
 import 'package:hotel_side/views/rooms_list/widgets/states.dart';
 import 'package:provider/provider.dart';
 
@@ -81,125 +80,17 @@ class ReviewListPage extends StatelessWidget {
                         //   ),
                         // );
                       },
-                      // child: ReviewDetailPage(review: review),
                       child: Column(
                         children: [
-                          // BookingContainer(booking: booking),
-                          const Divider(height: 1),
                           Padding(
-                            padding: const EdgeInsets.all(16),
+                            padding: EdgeInsets.all(16),
                             child: Column(
                               children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Check-in',
-                                            style: TextStyle(
-                                              color: Colors.grey[600],
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          // Text(
-                                          //   startdate,
-                                          //   style: const TextStyle(
-                                          //     fontWeight: FontWeight.w600,
-                                          //     fontSize: 14,
-                                          //   ),
-                                          // ),
-                                        ],
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 30,
-                                      width: 1,
-                                      color: Colors.grey[300],
-                                      margin: const EdgeInsets.symmetric(
-                                          horizontal: 16),
-                                    ),
-                                    Expanded(
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Check-out',
-                                            style: TextStyle(
-                                              color: Colors.grey[600],
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                          const SizedBox(height: 4),
-                                          // Text(
-                                          //   enddate,
-                                          //   style: const TextStyle(
-                                          //     fontWeight: FontWeight.w600,
-                                          //     fontSize: 14,
-                                          //   ),
-                                          // ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                const SizedBox(height: 16),
-                                Container(
-                                  padding: const EdgeInsets.all(16),
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[50],
-                                    borderRadius: BorderRadius.circular(12),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: BookingInfoItem(
-                                              icon: Icons.person_outline,
-                                              label: 'Childs',
-                                              value: review.rating!,
-                                              color: Colors.blue,
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: BookingInfoItem(
-                                              icon: Icons.cake_outlined,
-                                              label: 'Age',
-                                              value: review.rating!,
-                                              color: Colors.orange,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 16),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: BookingInfoItem(
-                                              icon: Icons.people_outline,
-                                              label: 'Adults',
-                                              value: review.rating!,
-                                              color: Colors.purple,
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: BookingInfoItem(
-                                              icon: Icons.hotel_outlined,
-                                              label: 'Customer ID',
-                                              value: review.rating!,
-                                              color: Colors.teal,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
+                                Text(review.rating!),
+                                Text(review.reviewId!),
+                                Text(review.reviewcontent!),
+                                Text('${review.reviewdate!}'),
+                                Text(review.useremail!)
                               ],
                             ),
                           ),

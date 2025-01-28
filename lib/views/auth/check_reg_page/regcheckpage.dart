@@ -23,7 +23,7 @@ class HotelCheckPage extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => BottomNavScreen(),
+            builder: (context) => const BottomNavScreen(),
           ),
         );
       } else {

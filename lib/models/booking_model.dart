@@ -41,7 +41,7 @@ class BookingSectionModel {
       name: res['name'] ?? '',
       numberOfAdults: res['noa'] ?? 0,
       numberOfChilds: res['noc'] ?? 0,
-      userId: res['userId'] ?? '',
+      userId: map['userId'] ?? '',
       paidAmount: res['paidAmount'] ?? 0,
       startdate: (res['startdate'] != null && res['startdate'] is Timestamp)
           ? (res['startdate'] as Timestamp).toDate()

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/booking_provider/booking_provider.dart';
+import 'package:hotel_side/utils/appbar/cutomappbar.dart';
 import 'package:hotel_side/views/bookings/booking_detail_page/booking_detail_page.dart';
 import 'package:hotel_side/views/bookings/bookings_list_page/booking_detail_view.dart';
 import 'package:hotel_side/views/rooms_list/widgets/states.dart';
@@ -14,24 +15,8 @@ class BookingsList extends StatelessWidget {
         Provider.of<BookingProvider>(context, listen: false);
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        title: const Text(
-          'My Bookings',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.blue[300],
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.white),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(20),
-          ),
-        ),
+      appBar: const HotelSideCustomAppbar(
+        heading: 'My Bookings',
       ),
       body: FutureBuilder(
         future: bookingProvider.getBookingDetails(),

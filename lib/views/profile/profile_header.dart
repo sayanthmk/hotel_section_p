@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hotel_side/views/settings/settings.dart';
+import 'package:hotel_side/views/settings/settings_main/settings.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({

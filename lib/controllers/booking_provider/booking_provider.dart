@@ -96,8 +96,8 @@ class BookingProvider extends ChangeNotifier {
 
     // Create a list of total payments per date
     return groupedPayments.entries.map((entry) {
-      double totalAmount =
-          entry.value.fold(0.0, (sum, booking) => sum + booking.paidAmount);
+      double totalAmount = entry.value
+          .fold(0.0, (amountSum, booking) => amountSum + booking.paidAmount);
 
       return {
         'date': entry.key,

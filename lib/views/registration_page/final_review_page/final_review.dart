@@ -50,7 +50,7 @@ class FinalReview extends StatelessWidget {
                   onTap: () {
                     hotelProvider.submitHotel().then((_) {
                       Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => BottomNavScreen(),
+                        builder: (context) => const BottomNavScreen(),
                       ));
                     }).catchError((error) {
                       ScaffoldMessenger.of(context).showSnackBar(

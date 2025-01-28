@@ -4,7 +4,6 @@ import 'package:hotel_side/controllers/booking_provider/booking_provider.dart';
 import 'package:hotel_side/controllers/room_controller/roomprovider.dart';
 import 'package:hotel_side/views/dashboard/grid_container/custom_card.dart';
 import 'package:hotel_side/views/dashboard/grid_container/pecentage.dart';
-import 'package:hotel_side/views/dashboard/rooms_section/rooms_card.dart';
 import 'package:hotel_side/views/dashboard/welcome_card/welcome_card.dart';
 import 'package:hotel_side/views/payments/payment.dart';
 import 'package:hotel_side/views/rooms_list/rooms_list.dart';
@@ -129,7 +128,7 @@ class DashboardPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 24),
-              const RoomStatusCard(),
+              // const RoomStatusCard(),
               // const SizedBox(height: 24),
               // const RecentBookings(),
             ],

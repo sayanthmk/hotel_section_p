@@ -8,15 +8,16 @@ class ReviewListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bookingProvider = Provider.of<ReviewProvider>(context, listen: false);
+    final reviewProvider = Provider.of<ReviewProvider>(context, listen: false);
+
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
         title: const Text(
           'My Reviews',
           style: TextStyle(
             color: Colors.white,
-            fontSize: 24,
+            fontSize: 20,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -31,7 +32,7 @@ class ReviewListPage extends StatelessWidget {
         ),
       ),
       body: FutureBuilder(
-        future: bookingProvider.getReviewsDetails(),
+        future: reviewProvider.getReviewsDetails(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LoadingState();
@@ -60,49 +61,71 @@ class ReviewListPage extends StatelessWidget {
               ),
             );
           }
+
           return Consumer<ReviewProvider>(
             builder: (context, provider, child) {
               final reviews = provider.reviewsList;
               return ListView.builder(
-                padding: const EdgeInsets.all(16),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                 itemCount: reviews.length,
                 itemBuilder: (context, index) {
                   provider.setSelectedreview(index);
                   final review = reviews[index];
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: InkWell(
-                      onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => const ReviewDetailPage(),
-                        //   ),
-                        // );
-                      },
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(16),
-                            child: Column(
-                              children: [
-                                Text(review.rating!),
-                                Text(review.reviewId!),
-                                Text(review.reviewcontent!),
-                                Text('${review.reviewdate!}'),
-                                Text(review.useremail!)
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
+                  return ReviewCard(review: review);
                 },
               );
             },
           );
         },
+      ),
+    );
+  }
+}
+
+class ReviewCard extends StatelessWidget {
+  final review;
+
+  const ReviewCard({required this.review});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2.0,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  review.rating!,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  review.reviewId!,
+                  style: const TextStyle(fontSize: 14, color: Colors.grey),
+                ),
+              ],
+            ),
+            const SizedBox(height: 8.0),
+            Text(review.reviewcontent!),
+            const SizedBox(height: 8.0),
+            Text(
+              'Reviewed on: ${review.reviewdate!}',
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+            const SizedBox(height: 8.0),
+            Text(
+              'By: ${review.useremail!}',
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -126,38 +126,13 @@ class BookingProvider extends ChangeNotifier {
     _selectedBooking = null;
     notifyListeners();
   }
+
+  DateTime? _bookingSelectedDate;
+
+  DateTime? get selectedDate => _bookingSelectedDate;
+
+  void setSelectedDate(DateTime date) {
+    _bookingSelectedDate = date;
+    notifyListeners();
+  }
 }
-// Future<List<Map<String, dynamic>>> getSortedPaymentsByDate() async {
-  //   if (userId == null) {
-  //     throw Exception('No user is logged in.');
-  //   }
-
-  //   try {
-  //     QuerySnapshot bookingSnapshot = await _firestore
-  //         .collection('approved_hotels')
-  //         .doc(userId)
-  //         .collection('bookings')
-  //         .get();
-
-  //     List<Map<String, dynamic>> payments = bookingSnapshot.docs.map((doc) {
-  //       final data = doc.data() as Map<String, dynamic>;
-  //       final bookingDetails = data['bookingDetails'] as Map<String, dynamic>?;
-  //       final bookingDate = bookingDetails?['currentDate'];
-  //       final paidAmount = bookingDetails?['paidAmount'] ?? 0;
-
-  //       return {
-  //         'currentDate': bookingDate != null
-  //             ? DateTime.tryParse(bookingDate) ?? DateTime(1900)
-  //             : DateTime(1900),
-  //         'paidAmount': paidAmount,
-  //         'bookingDetails': bookingDetails,
-  //       };
-  //     }).toList();
-
-  //     payments.sort((a, b) => a['currentDate'].compareTo(b['currentDate']));
-
-  //     return payments;
-  //   } catch (e) {
-  //     throw Exception('Failed to sort payments by date: $e');
-  //   }
-  // }

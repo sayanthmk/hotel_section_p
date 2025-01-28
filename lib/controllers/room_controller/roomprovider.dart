@@ -335,19 +335,4 @@ class RoomProvider extends ChangeNotifier {
     _selectedRoom = null;
     notifyListeners();
   }
-
-  ///////////////////////////////////////////
-  // int? _selectedBookingRoomIndex;
-  // RoomModel? _selectedBookingRoom;
-
-  // int? get selectedBookingRoomIndex => _selectedBookingRoomIndex;
-  // RoomModel? get selectedBookingRoom => _selectedBookingRoom;
-
-  // void setSelectedBookingRoom(int index) {
-  //   if (index >= 0 && index < _roomList.length) {
-  //     _selectedBookingRoomIndex = index;
-  //     _selectedRoom = _roomList[index];
-  //     // notifyListeners();
-  //   }
-  // }
 }

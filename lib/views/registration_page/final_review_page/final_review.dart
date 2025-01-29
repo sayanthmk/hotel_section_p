@@ -78,39 +78,3 @@ class FinalReview extends StatelessWidget {
     );
   }
 }
-  // child: ElevatedButton(
-                //   onPressed: () {
-                //     log('Hotel Type: ${hotelData['hotel_type']}');
-                //     log('Property Setup: ${hotelData['property_setup']}');
-                //     log('Contact Number: ${hotelData['info']?['contact_number']}');
-                //     log('State: ${hotelData['location']?['state']}');
-
-                //     hotelProvider.submitHotel().then((_) {
-                //       Navigator.of(context).push(MaterialPageRoute(
-                //         builder: (context) => BottomNavScreen(),
-                //       ));
-                //     }).catchError((error) {
-                //       ScaffoldMessenger.of(context).showSnackBar(
-                //         SnackBar(
-                //           content: Text('Error: $error'),
-                //           backgroundColor: Colors.red,
-                //         ),
-                //       );
-                //     });
-                //   },
-                //   style: ElevatedButton.styleFrom(
-                //     padding: const EdgeInsets.symmetric(vertical: 16),
-                //     shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(12),
-                //     ),
-                //   ),
-                //   child: const Text(
-                //     'Submit Hotel Details',
-                //     style: TextStyle(
-                //       fontSize: 16,
-                //       fontWeight: FontWeight.bold,
-                //     ),
-                //   ),
-                // ),
-
- 

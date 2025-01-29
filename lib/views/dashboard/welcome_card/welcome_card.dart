@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_side/controllers/auth_service/auth_service.dart';
+import 'package:hotel_side/views/settings/settings_main/settings.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -82,7 +83,11 @@ class EnhancedWelcomeCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const SettingsPage(),
+                      ));
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: Colors.blue[800],
@@ -94,9 +99,9 @@ class EnhancedWelcomeCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    icon: const Icon(Icons.bar_chart),
+                    icon: const Icon(Icons.settings),
                     label: const Text(
-                      'View Reports',
+                      'View Settings',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                       ),

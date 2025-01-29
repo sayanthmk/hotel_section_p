@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hotel_side/views/profile/profile_card.dart';
-import 'package:hotel_side/views/profile/profile_edit_button.dart';
 import 'package:hotel_side/views/profile/profile_header.dart';
 import 'package:hotel_side/views/profile/profile_name.dart';
 
@@ -18,7 +17,7 @@ class UserProfileScreen extends StatelessWidget {
               ProfileHeader(),
               ProfileName(),
               ProfileCard(),
-              EditProfileSection()
+              // EditProfileSection()
             ],
           ),
         ),

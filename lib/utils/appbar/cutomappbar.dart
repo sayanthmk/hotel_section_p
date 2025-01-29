@@ -37,33 +37,3 @@ class HotelSideCustomAppbar extends StatelessWidget
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
-
-
-// class HotelSideCustomAppbar extends StatelessWidget {
-//   const HotelSideCustomAppbar({
-//     super.key,
-//   });
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return AppBar(
-//       title: const Text(
-//         'My Bookings',
-//         style: TextStyle(
-//           color: Colors.white,
-//           fontSize: 24,
-//           fontWeight: FontWeight.w600,
-//         ),
-//       ),
-//       centerTitle: true,
-//       backgroundColor: Colors.blue[300],
-//       elevation: 0,
-//       iconTheme: const IconThemeData(color: Colors.white),
-//       shape: const RoundedRectangleBorder(
-//         borderRadius: BorderRadius.vertical(
-//           bottom: Radius.circular(20),
-//         ),
-//       ),
-//     );
-//   }
-// }

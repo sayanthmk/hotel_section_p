@@ -31,39 +31,120 @@ class RoomDetailPage extends StatelessWidget {
           ),
           actions: [
             PopupMenuButton<String>(
+              offset: const Offset(0, 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              elevation: 4,
+              color: const Color(0xFFFFFBF8),
+              icon: const Icon(
+                Icons.more_vert,
+                color: Color(0xFF7D5A50),
+              ),
+              position: PopupMenuPosition.under,
               itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
                 PopupMenuItem<String>(
-                  child: const Text('Edit'),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF7D5A50).withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(
+                            Icons.edit_outlined,
+                            color: Color(0xFF7D5A50),
+                            size: 20,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        const Text(
+                          'Edit',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Color(0xFF5E4238),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => RoomEditingPage(),
-                    ));
+                    // Adding a slight delay to avoid navigation conflict with popup menu
+                    Future.delayed(const Duration(milliseconds: 100), () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => RoomEditingPage(),
+                      ));
+                    });
                   },
                 ),
                 PopupMenuItem<String>(
-                  child: const Text('Delete'),
+                  height: 2,
+                  enabled: false,
+                  child: Divider(
+                    color: const Color(0xFF9C7B73).withOpacity(0.2),
+                    height: 2,
+                  ),
+                ),
+                PopupMenuItem<String>(
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFD4A373).withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(
+                            Icons.delete_outline,
+                            color: Color(0xFFD4A373),
+                            size: 20,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        const Text(
+                          'Delete',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Color(0xFFD4A373),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return CustomAlertDialog(
-                          contentText: 'Are you sure to delete the room?',
-                          titleText: 'Delete Room',
-                          buttonText1: 'Yes',
-                          buttonText2: 'No',
-                          onPressButton1: () async {
-                            await roomProvider
-                                .deleteRoom(roomDetails!['room_id']);
-                            provider.clearSelectedRoom();
-                            Navigator.of(context).pop();
-                            Navigator.of(context).pop();
-                          },
-                          onPressButton2: () {
-                            Navigator.of(context).pop();
-                          },
-                        );
-                      },
-                    );
+                    Future.delayed(const Duration(milliseconds: 100), () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return CustomAlertDialog(
+                            // icon: Icons.delete_outline,
+                            titleText: 'Delete Room',
+                            contentText:
+                                'Are you sure you want to delete this room? This action cannot be undone.',
+                            buttonText1: 'Cancel',
+                            buttonText2: 'Delete',
+                            // accentColor: const Color(0xFFD4A373),
+                            onPressButton1: () {
+                              Navigator.of(context).pop();
+                            },
+                            onPressButton2: () async {
+                              await roomProvider
+                                  .deleteRoom(roomDetails!['room_id']);
+                              provider.clearSelectedRoom();
+                              Navigator.of(context).pop();
+                              Navigator.of(context).pop();
+                            },
+                          );
+                        },
+                      );
+                    });
                   },
                 ),
               ],

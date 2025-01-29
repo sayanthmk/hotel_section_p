@@ -19,7 +19,6 @@ class DashboardPage extends StatelessWidget {
     final bookingprovider =
         Provider.of<BookingProvider>(context, listen: false);
     final bookingCount = bookingprovider.bookingList.length;
-    // final totalamount=bookingprovider.getPaymentTotal();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -82,7 +81,7 @@ class DashboardPage extends StatelessWidget {
                             iconColor: Colors.green,
                             iconBackgroundColor: Colors.green[100]!,
                             heading: 'Total Revenue',
-                            count: 0, // Display as an integer
+                            count: 0,
                             gradient: AdminColors.revenuecardcolor,
                           ),
                         );
@@ -109,14 +108,6 @@ class DashboardPage extends StatelessWidget {
                       }
                     },
                   ),
-                  // EnhancedBookingCard(
-                  //   icon: Icons.money,
-                  //   iconColor: Colors.green,
-                  //   iconBackgroundColor: Colors.green[100]!,
-                  //   heading: 'Total Revenue',
-                  //   count: totalamount,
-                  //   gradient: AdminColors.revenuecardcolor,
-                  // ),
                   EnhancedBookingCard(
                     icon: Icons.pie_chart,
                     iconColor: Colors.orange,

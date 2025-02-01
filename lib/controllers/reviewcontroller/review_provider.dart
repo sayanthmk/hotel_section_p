@@ -46,7 +46,6 @@ class ReviewProvider extends ChangeNotifier {
     if (index >= 0 && index < _reviewsList.length) {
       _selectedReviewIndex = index;
       _selectedreview = _reviewsList[index];
-      // notifyListeners();
     }
   }
 

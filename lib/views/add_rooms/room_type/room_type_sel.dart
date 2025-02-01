@@ -4,7 +4,6 @@ import 'package:hotel_side/views/add_rooms/room_facillity/room_facilities.dart';
 import 'package:hotel_side/views/add_rooms/room_type/room_textform.dart';
 import 'package:hotel_side/widgets/home_page_widgets/custom_dropdown.dart';
 import 'package:provider/provider.dart';
-
 import 'room_type_widgets.dart';
 
 class RoomTypeSelection extends StatelessWidget {

@@ -308,57 +308,27 @@ class BookingDetailCard extends StatelessWidget {
   }
 }
 
+// import 'package:flutter/material.dart';
 
-     // Padding(
-        //   padding: const EdgeInsets.symmetric(horizontal: 16),
-        //   child: Card(
-        //     color: Colors.white,
-        //     elevation: 2,
-        //     shape:
-        //         RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        //     child: Padding(
-        //       padding: const EdgeInsets.all(20),
-        //       child: Column(
-        //         crossAxisAlignment: CrossAxisAlignment.start,
-        //         children: [
-        //           Text(
-        //             'Room Details',
-        //             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-        //                   fontWeight: FontWeight.bold,
-        //                 ),
-        //           ),
-        //           const Divider(height: 32),
-        //           BookDetailInfoRow(
-        //             icon: Icons.person_outline,
-        //             label: 'Guest Name',
-        //             value: bookingDetails!.name,
-        //             color: Colors.purple,
-        //           ),
-        //           const SizedBox(height: 16),
-        //           BookDetailInfoRow(
-        //             icon: Icons.badge_outlined,
-        //             label: 'Room ID',
-        //             value: bookingDetails!.roomId,
-        //             color: Colors.orange,
-        //           ),
-        //           const SizedBox(height: 16),
-        //           BookDetailInfoRow(
-        //             icon: Icons.cake_outlined,
-        //             label: 'Age',
-        //             value: '${roomDetails!['Select Extra Bed Types']}',
-        //             color: Colors.teal,
-        //           ),
-        //           const SizedBox(height: 16),
-        //           // Text(
-        //           //   'Extra Bed Types: ${roomDetails!['Select Extra Bed Types']}',
-        //           //   style: Theme.of(context).textTheme.bodyLarge,
-        //           // ),
-        //           // Text(
-        //           //   'Number of Extra Adults Allowed: ${roomDetails!['Number of Extra Adults Allowed']}',
-        //           //   style: Theme.of(context).textTheme.bodyLarge,
-        //           // ),
-        //         ],
-        //       ),
-        //     ),
-        //   ),
-        // ),
+class AmenityChip extends StatelessWidget {
+  final String label;
+  final IconData icon;
+  final Color color;
+
+  const AmenityChip({
+    super.key,
+    required this.label,
+    required this.icon,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Chip(
+      avatar: Icon(icon, size: 18, color: color),
+      label: Text(label),
+      backgroundColor: color.withOpacity(0.1),
+      labelStyle: TextStyle(color: color),
+    );
+  }
+}

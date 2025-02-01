@@ -26,11 +26,8 @@ class BookingProvider extends ChangeNotifier {
       _bookingList.clear();
 
       for (var doc in bookingsnapshot.docs) {
-        // log('Document Data: ${doc.data()}');
         _bookingList.add(
             BookingSectionModel.fromMap(doc.data() as Map<String, dynamic>));
-        // log(_bookingList.toString());
-        // return bookingList;
       }
       notifyListeners();
     } catch (e) {
@@ -44,7 +41,6 @@ class BookingProvider extends ChangeNotifier {
     }
 
     try {
-      // Fetch all booking documents for the user
       QuerySnapshot bookingSnapshot = await _firestore
           .collection('approved_hotels')
           .doc(userId)
@@ -62,24 +58,19 @@ class BookingProvider extends ChangeNotifier {
       );
 
       notifyListeners();
-      // log(totalPaidAmount.toString());
       return totalPaidAmount;
     } catch (e) {
       throw Exception('Failed to fetch booking details: $e');
     }
   }
 
-  /// List payments grouped by booking date
   Map<String, List<BookingSectionModel>> getPaymentsGroupedByBookingDate() {
-    // Create a map to store bookings grouped by date
     Map<String, List<BookingSectionModel>> groupedPayments = {};
 
     for (var booking in _bookingList) {
-      // Format the booking date to 'yyyy-MM-dd' to group by day
       String formattedDate =
           DateFormat('yyyy-MM-dd').format(booking.bookingDate);
 
-      // Add booking to the appropriate group
       if (groupedPayments.containsKey(formattedDate)) {
         groupedPayments[formattedDate]!.add(booking);
       } else {
@@ -90,11 +81,9 @@ class BookingProvider extends ChangeNotifier {
     return groupedPayments;
   }
 
-  /// Display total payments for each date
   List<Map<String, dynamic>> getTotalPaymentsByDate() {
     final groupedPayments = getPaymentsGroupedByBookingDate();
 
-    // Create a list of total payments per date
     return groupedPayments.entries.map((entry) {
       double totalAmount = entry.value
           .fold(0.0, (amountSum, booking) => amountSum + booking.paidAmount);
@@ -117,7 +106,6 @@ class BookingProvider extends ChangeNotifier {
     if (index >= 0 && index < _bookingList.length) {
       _selectedBookingIndex = index;
       _selectedBooking = _bookingList[index];
-      // notifyListeners();
     }
   }
 

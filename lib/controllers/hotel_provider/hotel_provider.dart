@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -46,17 +47,16 @@ class HotelProvider extends ChangeNotifier {
   List<String> get imageUrls => _imageUrls;
   bool get isUploading => _isUploading;
   String? hotelId;
-//temporary update
   void updateHotelData(String field, dynamic value) {
     hotelData[field] = value;
     notifyListeners();
-    log('Hotel data updated: $field = $value');
+    // log('Hotel data updated: $field = $value');
   }
 
   Future<void> loadHotelIdFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     hotelId = prefs.getString('hotelId');
-    log('Loaded hotelId from prefs: $hotelId');
+    // log('Loaded hotelId from prefs: $hotelId');
     notifyListeners();
   }
 
@@ -86,7 +86,6 @@ class HotelProvider extends ChangeNotifier {
 
   Future<bool> uploadImages() async {
     if (_images.isEmpty) return false;
-    log('Starting hotel image upload');
     _isUploading = true;
     notifyListeners();
 
@@ -132,7 +131,9 @@ class HotelProvider extends ChangeNotifier {
       if (userId == null) {
         throw Exception('No authenticated user found');
       }
-
+      final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high,
+      );
       final DocumentReference docRef =
           _firestore.collection('approved_hotels').doc(userId);
 
@@ -144,6 +145,7 @@ class HotelProvider extends ChangeNotifier {
         'hotelId': hotelId,
         'created_at': FieldValue.serverTimestamp(),
         'status': 'pending',
+        'location': GeoPoint(position.latitude, position.longitude),
       };
 
       if (_imageUrls.isNotEmpty) {
@@ -155,7 +157,7 @@ class HotelProvider extends ChangeNotifier {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('hotelId', hotelId);
 
-      log('Hotel submitted successfully with ID: $hotelId');
+      // log('Hotel submitted successfully with ID: $hotelId');
       clearImages();
       hotelData.clear();
       return hotelId;
@@ -172,13 +174,12 @@ class HotelProvider extends ChangeNotifier {
       QuerySnapshot hotelQuery = await _firestore
           .collection('approved_hotels')
           .where('userId', isEqualTo: userId)
-          // .where('status', isEqualTo: 'approved')
           .limit(1)
           .get();
 
       if (hotelQuery.docs.isNotEmpty) {
         hotelId = hotelQuery.docs.first.id;
-        log('Hotel already registered with ID: $hotelId');
+        // log('Hotel already registered with ID: $hotelId');
         return hotelId;
       } else {
         log('Hotel not registered');
@@ -218,7 +219,6 @@ class HotelProvider extends ChangeNotifier {
     }
   }
 
-//update hotel
   Future<bool> updateHotel() async {
     try {
       if (hotelId == null) {
@@ -242,7 +242,6 @@ class HotelProvider extends ChangeNotifier {
     }
   }
 
-  //  delete hotel
   Future<bool> deleteHotel() async {
     try {
       if (hotelId == null) {
@@ -256,7 +255,7 @@ class HotelProvider extends ChangeNotifier {
       await prefs.remove('hotelId');
 
       hotelId = null;
-      log('Hotel deleted successfully');
+      // log('Hotel deleted successfully');
       return true;
     } catch (e) {
       debugPrint('Error deleting hotel: $e');

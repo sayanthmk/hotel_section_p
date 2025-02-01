@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -47,7 +46,6 @@ class RoomProvider extends ChangeNotifier {
   void updateRoomData(String field, dynamic value) {
     roomData[field] = value;
     notifyListeners();
-    log('Room data updated: $field = $value');
   }
 
   Future<void> pickRoomImages() async {
@@ -116,7 +114,6 @@ class RoomProvider extends ChangeNotifier {
           await _firestore.collection('approved_hotels').doc(userId).get();
 
       if (!hotelDoc.exists) {
-        log('Hotel document does not exist for userId: $userId');
         throw Exception(
             'Hotel document does not exist. Please submit the hotel first.');
       }
@@ -144,11 +141,6 @@ class RoomProvider extends ChangeNotifier {
 
       await roomRef.set(finalRoomData);
 
-      // await roomRef.update({'room_id': roomId});
-
-      log('Room added to hotel with ID: $hotelId, Room ID: $roomId');
-
-      log('Room added to hotel with ID: $hotelId');
       clearRoomImages();
       roomData.clear();
     } catch (e) {
@@ -164,14 +156,11 @@ class RoomProvider extends ChangeNotifier {
           await _firestore.collection('approved_hotels').doc(userId).get();
 
       if (!hotelDoc.exists) {
-        log('Hotel document does not exist for userId: $userId');
         throw Exception(
             'Hotel document does not exist. Please submit the hotel first.');
       }
 
       String? hotelId = userId;
-
-      log('Hotel ID fetched: $hotelId');
 
       QuerySnapshot roomSnapshot = await _firestore
           .collection('approved_hotels')
@@ -180,16 +169,13 @@ class RoomProvider extends ChangeNotifier {
           .get();
 
       _roomList.clear();
-      // clearSelectedRoom();
 
       for (var doc in roomSnapshot.docs) {
         _roomList.add(doc.data() as Map<String, dynamic>);
       }
 
-      log('Rooms fetched for hotel: $hotelId');
       notifyListeners();
     } catch (e) {
-      log('Error fetching rooms: $e');
       throw Exception('Failed to fetch rooms. Error: $e');
     }
   }
@@ -221,7 +207,6 @@ class RoomProvider extends ChangeNotifier {
       DocumentSnapshot hotelDoc =
           await _firestore.collection('approved_hotels').doc(userId).get();
       if (!hotelDoc.exists) {
-        log('Hotel document does not exist for userId: $userId');
         throw Exception(
             'Hotel document does not exist. Please submit the hotel first.');
       }
@@ -232,11 +217,9 @@ class RoomProvider extends ChangeNotifier {
           .collection('rooms')
           .doc(roomId)
           .update(updatedData);
-      // log('Room updated with ID: $roomId');
       await getRooms();
       notifyListeners();
     } catch (e) {
-      log('Error updating room: $e');
       throw Exception('Failed to update room. Error: $e');
     }
   }
@@ -245,20 +228,16 @@ class RoomProvider extends ChangeNotifier {
   ///
   Future<void> getRoomById(String roomId) async {
     try {
-      // Get the current user's ID
       String userId = FirebaseAuth.instance.currentUser!.uid;
 
-      // Fetch the hotel document for the current user
       DocumentSnapshot hotelDoc =
           await _firestore.collection('approved_hotels').doc(userId).get();
 
       if (!hotelDoc.exists) {
-        log('Hotel document does not exist for userId: $userId');
         throw Exception(
             'Hotel document does not exist. Please submit the hotel first.');
       }
 
-      // Fetch the specific room document by roomId
       DocumentSnapshot roomDoc = await _firestore
           .collection('approved_hotels')
           .doc(userId)
@@ -267,18 +246,14 @@ class RoomProvider extends ChangeNotifier {
           .get();
 
       if (!roomDoc.exists) {
-        log('Room document does not exist for roomId: $roomId');
         throw Exception('Room not found. Please check the room ID.');
       }
 
-      // Update the selected room data
       Map<String, dynamic> roomDetails = roomDoc.data() as Map<String, dynamic>;
-      log('Room details fetched: $roomDetails');
       _selectedRoom = roomDetails;
 
       notifyListeners();
     } catch (e) {
-      log('Error fetching room details: $e');
       throw Exception('Failed to fetch room details. Error: $e');
     }
   }
@@ -291,7 +266,6 @@ class RoomProvider extends ChangeNotifier {
       DocumentSnapshot hotelDoc =
           await _firestore.collection('approved_hotels').doc(userId).get();
       if (!hotelDoc.exists) {
-        log('Hotel document does not exist for userId: $userId');
         throw Exception(
             'Hotel document does not exist. Please submit the hotel first.');
       }
@@ -311,7 +285,6 @@ class RoomProvider extends ChangeNotifier {
 
       notifyListeners();
     } catch (e) {
-      log('Error deleting room: $e');
       throw Exception('Failed to delete room. Error: $e');
     }
   }
@@ -326,7 +299,6 @@ class RoomProvider extends ChangeNotifier {
     if (index >= 0 && index < _roomList.length) {
       _selectedRoomIndex = index;
       _selectedRoom = _roomList[index];
-      // notifyListeners();
     }
   }
 

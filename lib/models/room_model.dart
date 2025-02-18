@@ -43,7 +43,6 @@ class RoomModel {
     required this.roomImages,
   });
 
-  // Convert a Room object to JSON
   Map<String, dynamic> toJson() {
     return {
       "room_area": roomArea,
@@ -69,7 +68,6 @@ class RoomModel {
     };
   }
 
-  // Create a Room object from JSON
   factory RoomModel.fromJson(Map<String, dynamic> json) {
     return RoomModel(
       roomArea: json["room_area"] ?? '',

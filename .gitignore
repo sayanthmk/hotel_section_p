@@ -43,3 +43,6 @@ app.*.map.json
 /android/app/release
 #google map
 lib/constants/google_map_api
+#release keys
+key.properties
+app/upload-keystore.jks

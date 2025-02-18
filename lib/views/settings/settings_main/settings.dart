@@ -5,6 +5,8 @@ import 'package:hotel_side/utils/appbar/cutomappbar.dart';
 import 'package:hotel_side/views/auth/route_page.dart';
 import 'package:hotel_side/views/settings/settings_items/about_us.dart';
 import 'package:hotel_side/views/settings/settings_items/contact_us.dart';
+import 'package:hotel_side/views/settings/settings_items/privay_policy.dart';
+import 'package:hotel_side/views/settings/settings_items/terms_conditions.dart';
 import 'package:hotel_side/views/settings/settings_main/widgets/settings_haeder.dart';
 import 'package:hotel_side/widgets/home_page_widgets/alert_box.dart';
 import 'package:provider/provider.dart';
@@ -49,15 +51,37 @@ class SettingsPage extends StatelessWidget {
                 ),
                 const Divider(height: 24, thickness: 1),
                 const SettingsSectionHeader(text: 'Preferences'),
+                // SettingsTile(
+                //   icon: Icons.notifications,
+                //   title: 'Notifications',
+                //   onTap: () {},
+                // ),
+                // SettingsTile(
+                //   icon: Icons.language,
+                //   title: 'Language',
+                //   onTap: () {},
+                // ),
                 SettingsTile(
-                  icon: Icons.notifications,
-                  title: 'Notifications',
-                  onTap: () {},
+                  icon: Icons.language,
+                  title: 'Privacy Policy',
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const PrivacyPolicy(),
+                      ),
+                    );
+                  },
                 ),
                 SettingsTile(
                   icon: Icons.language,
-                  title: 'Language',
-                  onTap: () {},
+                  title: 'Terms&Conditions',
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => const TermsConditions(),
+                      ),
+                    );
+                  },
                 ),
                 const Divider(height: 24, thickness: 1),
                 const SettingsSectionHeader(text: 'Support'),

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter/foundation.dart';
@@ -18,9 +17,7 @@ class AuthService with ChangeNotifier {
           email: email, password: password);
       notifyListeners();
       return result.user;
-      // log('sign in called');
     } catch (e) {
-      // log(e.toString());
       return null;
     }
   }
@@ -28,13 +25,11 @@ class AuthService with ChangeNotifier {
   Future<User?> createUserWithEmailAndPassword(
       String email, String password) async {
     try {
-      // log('sign up called');
       final result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       notifyListeners();
       return result.user;
     } catch (e) {
-      // log(e.toString());
       return null;
     }
   }
@@ -55,7 +50,6 @@ class AuthService with ChangeNotifier {
       notifyListeners();
       return result.user;
     } catch (e) {
-      // log(e.toString());
       return null;
     }
   }
@@ -82,7 +76,6 @@ class AuthService with ChangeNotifier {
       notifyListeners();
       return result.user;
     } catch (e) {
-      // log(e.toString());
       return null;
     }
   }

@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -50,13 +49,11 @@ class HotelProvider extends ChangeNotifier {
   void updateHotelData(String field, dynamic value) {
     hotelData[field] = value;
     notifyListeners();
-    // log('Hotel data updated: $field = $value');
   }
 
   Future<void> loadHotelIdFromPrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     hotelId = prefs.getString('hotelId');
-    // log('Loaded hotelId from prefs: $hotelId');
     notifyListeners();
   }
 
@@ -157,7 +154,6 @@ class HotelProvider extends ChangeNotifier {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString('hotelId', hotelId);
 
-      // log('Hotel submitted successfully with ID: $hotelId');
       clearImages();
       hotelData.clear();
       return hotelId;
@@ -179,10 +175,8 @@ class HotelProvider extends ChangeNotifier {
 
       if (hotelQuery.docs.isNotEmpty) {
         hotelId = hotelQuery.docs.first.id;
-        // log('Hotel already registered with ID: $hotelId');
         return hotelId;
       } else {
-        log('Hotel not registered');
         return null;
       }
     } catch (e) {
@@ -196,7 +190,6 @@ class HotelProvider extends ChangeNotifier {
       if (hotelId == null) {
         hotelId = await checkHotelRegistration();
         if (hotelId == null) {
-          log('No hotel ID found');
           return null;
         }
       }
@@ -207,10 +200,8 @@ class HotelProvider extends ChangeNotifier {
       if (hotelDoc.exists) {
         Map<String, dynamic> hotelDetails =
             hotelDoc.data() as Map<String, dynamic>;
-        log('Fetched current hotel details for hotelId: $hotelId');
         return hotelDetails;
       } else {
-        log('No hotel found for hotelId: $hotelId');
         return null;
       }
     } catch (e) {
@@ -222,7 +213,6 @@ class HotelProvider extends ChangeNotifier {
   Future<bool> updateHotel() async {
     try {
       if (hotelId == null) {
-        log('No hotel ID available for update');
         return false;
       }
 
@@ -234,7 +224,6 @@ class HotelProvider extends ChangeNotifier {
           .collection('approved_hotels')
           .doc(hotelId)
           .update(hotelData);
-      log('Hotel updated successfully: $hotelId');
       return true;
     } catch (e) {
       debugPrint('Error updating hotel: $e');
@@ -245,7 +234,6 @@ class HotelProvider extends ChangeNotifier {
   Future<bool> deleteHotel() async {
     try {
       if (hotelId == null) {
-        log('No hotel ID available for deletion');
         return false;
       }
 

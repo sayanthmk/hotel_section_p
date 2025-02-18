@@ -83,14 +83,12 @@ class LocationProvider extends ChangeNotifier {
     try {
       await _firestore.collection('approved_hotels').doc(userId).update({
         'location': GeoPoint(position.latitude, position.longitude),
-        // 'lastUpdated': FieldValue.serverTimestamp(),
       });
     } catch (e) {
       // If document doesn't exist, create it
       if (e is FirebaseException && e.code == 'not-found') {
         await _firestore.collection('approved_hotels').doc(userId).set({
           'location': GeoPoint(position.latitude, position.longitude),
-          // 'lastUpdated': FieldValue.serverTimestamp(),
         }, SetOptions(merge: true));
       } else {
         throw Exception('Failed to store location: ${e.toString()}');
@@ -108,7 +106,7 @@ class LocationProvider extends ChangeNotifier {
       if (placemarks.isNotEmpty) {
         final place = placemarks[0];
         _currentAddress =
-            '${place.street}, ${place.subLocality}, ${place.locality}, ${place.postalCode}';
+            '${place.street},${place.subLocality},${place.locality},${place.postalCode}';
       }
     } catch (e) {
       _error = 'Error getting address: ${e.toString()}';
